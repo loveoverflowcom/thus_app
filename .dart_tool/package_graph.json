@@ -1,0 +1,28 @@
+{
+  "roots": [
+    "thus_workspace"
+  ],
+  "packages": [
+    {
+      "name": "thus_workspace",
+      "version": "0.1.0",
+      "dependencies": [
+        "meta"
+      ],
+      "devDependencies": [
+        "very_good_analysis"
+      ]
+    },
+    {
+      "name": "very_good_analysis",
+      "version": "6.0.0",
+      "dependencies": []
+    },
+    {
+      "name": "meta",
+      "version": "1.18.1",
+      "dependencies": []
+    }
+  ],
+  "configVersion": 1
+}
