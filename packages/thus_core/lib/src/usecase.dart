@@ -11,12 +11,8 @@ abstract class UseCase<ReturnType, Params> {
 /// Convenience type for use cases that only return success or failure.
 @immutable
 class Result<T> {
-  const Result.success(this.value)
-      : failure = null,
-        isSuccess = true;
-  const Result.failure(this.failure)
-      : value = null,
-        isSuccess = false;
+  const Result.success(this.value) : failure = null, isSuccess = true;
+  const Result.failure(this.failure) : value = null, isSuccess = false;
 
   final T? value;
   final Failure? failure;

@@ -1,26 +1,18 @@
-import 'package:web_socket/web_socket.dart';
+import 'dart:io';
 
-Future<void> main() async {
-  print('Connecting to WebSocket server...');
+import 'package:thus_messaging/thus_messaging.dart';
 
-  final socket =
-      await WebSocket.connect(Uri.parse('ws://127.0.0.1:9001'));
+void main() {
+  final Message message = Message(
+    id: 'local-1',
+    senderId: 'alice',
+    receiverId: 'bob',
+    timestamp: DateTime.utc(2026, 3, 19),
+    content: 'hello from thus_messaging',
+    status: MessageStatus.sent,
+    conversationId: 'bob',
+    source: 'example',
+  );
 
-  print('Connected!');
-
-  socket.events.listen((event) async {
-    switch (event) {
-      case TextDataReceived(text: final text):
-        print('Received text: $text');
-
-      case BinaryDataReceived(data: final data):
-        print('Received binary: $data');
-
-      case CloseReceived(code: final code, reason: final reason):
-        print('Connection closed: $code [$reason]');
-    }
-  });
-
-  // Gửi thử message
-  socket.sendText('Hello from thus_messaging example 🚀');
+  stdout.writeln(message.toJson());
 }

@@ -8,7 +8,9 @@ class Cli {
 
   final List<CommandHandler> _handlers;
 
-  Map<String, CommandHandler> get _handlerMap => {for (final h in _handlers) h.command: h};
+  Map<String, CommandHandler> get _handlerMap => {
+    for (final h in _handlers) h.command: h,
+  };
 
   Future<void> run(List<String> args) async {
     if (args.isNotEmpty) {
@@ -18,7 +20,7 @@ class Cli {
 
     _printHelp();
     stdout.write('thus> ');
-    await for (final line in stdin.transform(SystemEncoding().decoder)) {
+    await for (final line in stdin.transform(const SystemEncoding().decoder)) {
       final trimmed = line.trim();
       if (trimmed.isEmpty) {
         stdout.write('thus> ');
@@ -40,7 +42,12 @@ class Cli {
       _printHelp();
       return;
     }
-    await handler.handle(args);
+
+    try {
+      await handler.handle(args);
+    } on Object catch (error) {
+      stdout.writeln('Command failed: $error');
+    }
   }
 
   void _printHelp() {
@@ -48,6 +55,6 @@ class Cli {
     for (final handler in _handlers) {
       stdout.writeln('  ${handler.description}');
     }
-    stdout.writeln('  /exit — quit CLI');
+    stdout.writeln('  /exit - quit CLI');
   }
 }

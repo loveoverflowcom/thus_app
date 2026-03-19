@@ -9,5 +9,7 @@ class LoadChatHistory extends UseCase<List<Message>, String> {
   final MessageRepository _repository;
 
   @override
-  Future<List<Message>> call(String conversationId) => _repository.loadHistory(conversationId);
+  Future<List<Message>> call(String conversationId) {
+    return _repository.loadHistory(conversationId);
+  }
 }

@@ -1,16 +1,18 @@
-import 'package:thus_messaging/thus_messaging.dart';
 import 'package:test/test.dart';
+import 'package:thus_messaging/thus_messaging.dart';
 
 void main() {
-  group('A group of tests', () {
-    final awesome = Awesome();
+  group('SendMessageParams', () {
+    test('keeps target and content', () {
+      const SendMessageParams params = SendMessageParams(
+        toUserId: 'user-2',
+        content: 'hello',
+        source: 'test',
+      );
 
-    setUp(() {
-      // Additional setup goes here.
-    });
-
-    test('First Test', () {
-      expect(awesome.isAwesome, isTrue);
+      expect(params.toUserId, 'user-2');
+      expect(params.content, 'hello');
+      expect(params.source, 'test');
     });
   });
 }

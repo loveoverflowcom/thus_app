@@ -7,41 +7,40 @@ import 'package:thus_messaging/thus_messaging.dart';
 import 'command_handler.dart';
 
 class SendCommand implements CommandHandler {
-  SendCommand(this._sendMessage, this._loadIdentity);
+  SendCommand(this._sendMessage, this._loadSession);
 
   final SendMessage _sendMessage;
-  final LoadIdentity _loadIdentity;
+  final LoadSession _loadSession;
 
   @override
   String get command => '/send';
 
   @override
-  String get description => '/send <user> <message> — send message to a user';
+  String get description => '/send <target_user_id> <message> - send message';
 
   @override
   Future<void> handle(List<String> args) async {
     if (args.length < 2) {
-      stdout.writeln('Usage: /send <user> <message>');
-      return;
-    }
-    final identity = await _loadIdentity.call(const NoParams());
-    if (identity == null) {
-      stdout.writeln('Login first with /login <displayName>');
+      stdout.writeln('Usage: /send <target_user_id> <message>');
       return;
     }
 
-    final receiverId = args.first;
-    final content = args.sublist(1).join(' ');
-    final message = Message(
-      id: DateTime.now().microsecondsSinceEpoch.toString(),
-      senderId: identity.id,
-      receiverId: receiverId,
-      timestamp: DateTime.now().toUtc(),
-      content: content,
-      status: MessageStatus.sending,
-      conversationId: receiverId,
+    final AuthSession? session = await _loadSession(const NoParams());
+    if (session == null) {
+      stdout.writeln('Login first with /login <username> <password>');
+      return;
+    }
+
+    final Message persisted = await _sendMessage(
+      SendMessageParams(
+        toUserId: args.first,
+        content: args.sublist(1).join(' '),
+        source: 'thus_cli',
+      ),
     );
-    final persisted = await _sendMessage.call(message);
-    stdout.writeln('sent → ${persisted.receiverId}: ${persisted.content} [${persisted.status.name}]');
+
+    stdout.writeln(
+      'sent -> ${persisted.receiverId}: ${persisted.content} [${persisted.status.name}]',
+    );
   }
 }

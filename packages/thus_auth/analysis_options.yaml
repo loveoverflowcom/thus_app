@@ -4,3 +4,16 @@ analyzer:
   exclude:
     - '**/*.g.dart'
     - '**/*.freezed.dart'
+
+linter:
+  rules:
+    always_use_package_imports: false
+    avoid_slow_async_io: false
+    avoid_redundant_argument_values: false
+    cascade_invocations: false
+    directives_ordering: false
+    lines_longer_than_80_chars: false
+    omit_local_variable_types: false
+    one_member_abstracts: false
+    public_member_api_docs: false
+    unnecessary_library_directive: false

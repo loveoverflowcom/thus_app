@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_ce/hive.dart';
 
 import 'message_status.dart';
 
@@ -8,16 +7,20 @@ part 'message.g.dart';
 
 @freezed
 class Message with _$Message {
-  @HiveType(typeId: 2, adapterName: 'MessageAdapter')
   const factory Message({
-    @HiveField(0) required String id,
-    @HiveField(1) required String senderId,
-    @HiveField(2) required String receiverId,
-    @HiveField(3) required DateTime timestamp,
-    @HiveField(4) required String content,
-    @HiveField(5) @JsonKey(defaultValue: MessageStatus.sending) required MessageStatus status,
-    @HiveField(6) String? conversationId,
+    required String id,
+    required String senderId,
+    required String receiverId,
+    required DateTime timestamp,
+    required String content,
+    required MessageStatus status,
+    required String conversationId,
+    @Default('chat.message') String eventName,
+    String? source,
+    @Default(false) bool isIncoming,
+    String? remoteEventId,
   }) = _Message;
 
-  factory Message.fromJson(Map<String, dynamic> json) => _$MessageFromJson(json);
+  factory Message.fromJson(Map<String, dynamic> json) =>
+      _$MessageFromJson(json);
 }

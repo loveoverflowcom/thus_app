@@ -7,33 +7,36 @@ class ChatState extends Equatable {
     required this.status,
     required this.messages,
     this.conversationId,
-    this.error,
+    this.errorMessage,
   });
 
   const ChatState.initial()
-      : status = ChatStatus.initial,
-        messages = const [],
-        conversationId = null,
-        error = null;
+    : this(status: ChatStatus.initial, messages: const <Message>[]);
 
   final ChatStatus status;
   final List<Message> messages;
   final String? conversationId;
-  final String? error;
+  final String? errorMessage;
 
   ChatState copyWith({
     ChatStatus? status,
     List<Message>? messages,
     String? conversationId,
-    String? error,
-  }) =>
-      ChatState(
-        status: status ?? this.status,
-        messages: messages ?? this.messages,
-        conversationId: conversationId ?? this.conversationId,
-        error: error ?? this.error,
-      );
+    String? errorMessage,
+  }) {
+    return ChatState(
+      status: status ?? this.status,
+      messages: messages ?? this.messages,
+      conversationId: conversationId ?? this.conversationId,
+      errorMessage: errorMessage ?? this.errorMessage,
+    );
+  }
 
   @override
-  List<Object?> get props => [status, messages, conversationId, error];
+  List<Object?> get props => <Object?>[
+    status,
+    messages,
+    conversationId,
+    errorMessage,
+  ];
 }

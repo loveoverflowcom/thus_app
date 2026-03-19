@@ -4,40 +4,38 @@ sealed class ChatEvent extends Equatable {
   const ChatEvent();
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => <Object?>[];
 }
 
 class LoadConversation extends ChatEvent {
   const LoadConversation(this.conversationId);
+
   final String conversationId;
 
   @override
-  List<Object?> get props => [conversationId];
+  List<Object?> get props => <Object?>[conversationId];
 }
 
 class SendChatMessage extends ChatEvent {
   const SendChatMessage({
-    required this.id,
-    required this.senderId,
     required this.receiverId,
     required this.content,
-    this.status = MessageStatus.sending,
+    this.source = 'thus_mobile',
   });
 
-  final String id;
-  final String senderId;
   final String receiverId;
   final String content;
-  final MessageStatus status;
+  final String source;
 
   @override
-  List<Object?> get props => [id, senderId, receiverId, content, status];
+  List<Object?> get props => <Object?>[receiverId, content, source];
 }
 
-class _IncomingMessage extends ChatEvent {
-  const _IncomingMessage(this.message);
+class ChatMessageReceived extends ChatEvent {
+  const ChatMessageReceived(this.message);
+
   final Message message;
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => <Object?>[message];
 }

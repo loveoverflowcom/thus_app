@@ -6,7 +6,16 @@ enum LogLevel { debug, info, warning, error }
 class AppLogger {
   const AppLogger();
 
-  void log(String message, {LogLevel level = LogLevel.info, Object? error, StackTrace? stackTrace}) {
-    developer.log('[${level.name.toUpperCase()}] $message', error: error, stackTrace: stackTrace);
+  void log(
+    String message, {
+    LogLevel level = LogLevel.info,
+    Object? error,
+    StackTrace? stackTrace,
+  }) {
+    developer.log(
+      '[${level.name.toUpperCase()}] $message',
+      error: error,
+      stackTrace: stackTrace,
+    );
   }
 }

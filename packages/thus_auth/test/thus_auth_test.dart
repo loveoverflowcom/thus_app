@@ -1,16 +1,22 @@
-import 'package:thus_auth/thus_auth.dart';
 import 'package:test/test.dart';
+import 'package:thus_auth/thus_auth.dart';
 
 void main() {
-  group('A group of tests', () {
-    final awesome = Awesome();
+  group('AuthSession', () {
+    test('serializes to and from json', () {
+      final AuthSession session = AuthSession(
+        userId: 'user-1',
+        username: 'alice',
+        accessToken: 'access',
+        refreshToken: 'refresh',
+        notificationToken: 'notify',
+        authenticatedAt: DateTime.utc(2026, 3, 19),
+      );
 
-    setUp(() {
-      // Additional setup goes here.
-    });
+      final Map<String, dynamic> json = session.toJson();
+      final AuthSession restored = AuthSession.fromJson(json);
 
-    test('First Test', () {
-      expect(awesome.isAwesome, isTrue);
+      expect(restored, session);
     });
   });
 }

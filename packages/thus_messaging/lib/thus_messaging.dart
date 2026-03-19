@@ -7,6 +7,7 @@ export 'src/domain/entities/conversation.dart';
 export 'src/domain/entities/message.dart';
 export 'src/domain/entities/message_status.dart';
 export 'src/domain/usecases/load_chat_history.dart';
+export 'src/domain/usecases/load_chats.dart';
 export 'src/domain/usecases/receive_message.dart';
 export 'src/domain/usecases/send_message.dart';
 export 'src/domain/usecases/subscribe_chat_stream.dart';

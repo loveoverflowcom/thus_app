@@ -9,5 +9,7 @@ class ReceiveMessage extends UseCase<Stream<Message>, NoParams> {
   final MessageRepository _repository;
 
   @override
-  Future<Stream<Message>> call(NoParams params) async => _repository.incoming();
+  Future<Stream<Message>> call(NoParams params) async {
+    return _repository.incoming();
+  }
 }

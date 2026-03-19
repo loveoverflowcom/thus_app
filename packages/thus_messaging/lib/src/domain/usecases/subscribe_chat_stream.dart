@@ -9,5 +9,7 @@ class SubscribeChatStream extends UseCase<Stream<Message>, String> {
   final MessageRepository _repository;
 
   @override
-  Future<Stream<Message>> call(String conversationId) async => _repository.subscribe(conversationId);
+  Future<Stream<Message>> call(String conversationId) async {
+    return _repository.subscribe(conversationId);
+  }
 }

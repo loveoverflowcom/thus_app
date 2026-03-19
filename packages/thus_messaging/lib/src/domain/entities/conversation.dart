@@ -12,5 +12,6 @@ class Conversation with _$Conversation {
     required List<Message> messages,
   }) = _Conversation;
 
-  factory Conversation.fromJson(Map<String, dynamic> json) => _$ConversationFromJson(json);
+  factory Conversation.fromJson(Map<String, dynamic> json) =>
+      _$ConversationFromJson(json);
 }

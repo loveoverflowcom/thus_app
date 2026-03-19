@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -11,42 +13,105 @@ part 'chat_state.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ChatBloc(this._loadChatHistory, this._sendMessage, this._subscribe)
-      : super(const ChatState.initial()) {
+    : super(const ChatState.initial()) {
     on<LoadConversation>(_onLoadConversation);
     on<SendChatMessage>(_onSendMessage);
-    on<_IncomingMessage>(_onIncomingMessage);
+    on<ChatMessageReceived>(_onMessageReceived);
   }
 
   final LoadChatHistory _loadChatHistory;
   final SendMessage _sendMessage;
   final SubscribeChatStream _subscribe;
 
-  Future<void> _onLoadConversation(LoadConversation event, Emitter<ChatState> emit) async {
-    emit(state.copyWith(status: ChatStatus.loading, conversationId: event.conversationId));
-    final history = await _loadChatHistory.call(event.conversationId);
-    emit(state.copyWith(status: ChatStatus.ready, messages: history));
+  StreamSubscription<Message>? _subscription;
 
-    final stream = await _subscribe.call(event.conversationId);
-    await emit.forEach<Message>(stream, onData: (message) {
-      return state.copyWith(messages: [...state.messages, message]);
-    });
-  }
-
-  Future<void> _onSendMessage(SendChatMessage event, Emitter<ChatState> emit) async {
-    final message = Message(
-      id: event.id,
-      senderId: event.senderId,
-      receiverId: event.receiverId,
-      timestamp: DateTime.now().toUtc(),
-      content: event.content,
-      status: event.status,
-      conversationId: state.conversationId,
+  Future<void> _onLoadConversation(
+    LoadConversation event,
+    Emitter<ChatState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        status: ChatStatus.loading,
+        conversationId: event.conversationId,
+        errorMessage: null,
+      ),
     );
-    final persisted = await _sendMessage.call(message);
-    emit(state.copyWith(messages: [...state.messages, persisted]));
+
+    try {
+      final List<Message> history = await _loadChatHistory(
+        event.conversationId,
+      );
+      emit(state.copyWith(status: ChatStatus.ready, messages: history));
+
+      await _subscription?.cancel();
+      final Stream<Message> stream = await _subscribe(event.conversationId);
+      _subscription = stream.listen(
+        (Message message) => add(ChatMessageReceived(message)),
+        onError: addError,
+      );
+    } on Object catch (error, stackTrace) {
+      addError(error, stackTrace);
+      emit(
+        state.copyWith(
+          status: ChatStatus.failure,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
   }
 
-  void _onIncomingMessage(_IncomingMessage event, Emitter<ChatState> emit) {
-    emit(state.copyWith(messages: [...state.messages, event.message]));
+  Future<void> _onSendMessage(
+    SendChatMessage event,
+    Emitter<ChatState> emit,
+  ) async {
+    try {
+      final Message persisted = await _sendMessage(
+        SendMessageParams(
+          toUserId: event.receiverId,
+          content: event.content,
+          source: event.source,
+        ),
+      );
+
+      add(ChatMessageReceived(persisted));
+    } on Object catch (error, stackTrace) {
+      addError(error, stackTrace);
+      emit(
+        state.copyWith(
+          status: ChatStatus.failure,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  void _onMessageReceived(ChatMessageReceived event, Emitter<ChatState> emit) {
+    final bool alreadyExists = state.messages.any(
+      (Message message) => message.id == event.message.id,
+    );
+    if (alreadyExists) {
+      final List<Message> updated = state.messages
+          .map(
+            (Message message) =>
+                message.id == event.message.id ? event.message : message,
+          )
+          .toList(growable: false);
+      emit(state.copyWith(messages: updated));
+      return;
+    }
+
+    final List<Message> updatedMessages =
+        <Message>[...state.messages, event.message]..sort(
+          (Message left, Message right) =>
+              left.timestamp.compareTo(right.timestamp),
+        );
+
+    emit(state.copyWith(status: ChatStatus.ready, messages: updatedMessages));
+  }
+
+  @override
+  Future<void> close() async {
+    await _subscription?.cancel();
+    return super.close();
   }
 }

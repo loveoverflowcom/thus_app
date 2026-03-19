@@ -18,17 +18,15 @@ class SplashPage extends StatelessWidget {
         switch (state.status) {
           case AuthStatus.authenticated:
             Navigator.of(context).pushReplacementNamed(ChatListPage.route);
-            break;
           case AuthStatus.unauthenticated:
             Navigator.of(context).pushReplacementNamed(IdentitySetupPage.route);
-            break;
-          default:
+          case AuthStatus.initial:
+          case AuthStatus.loading:
+          case AuthStatus.failure:
             break;
         }
       },
-      child: const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      ),
+      child: const Scaffold(body: Center(child: CircularProgressIndicator())),
     );
   }
 }

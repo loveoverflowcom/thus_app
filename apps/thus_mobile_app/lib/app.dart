@@ -15,7 +15,9 @@ class ThusApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthBloc>(create: (_) => sl<AuthBloc>()..add(const AppStarted())),
+        BlocProvider<AuthBloc>(
+          create: (_) => sl<AuthBloc>()..add(const AppStarted()),
+        ),
       ],
       child: MaterialApp(
         title: 'Thus Chat',

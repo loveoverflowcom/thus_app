@@ -1,5 +1,5 @@
 name: thus_mobile_app
-description: Thus mobile Flutter client (WhatsApp-like, key-based auth).
+description: Thus mobile Flutter client powered by EvoBase auth and SSE.
 version: 1.0.0
 publish_to: none
 
@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.8
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
@@ -25,15 +26,14 @@ dependencies:
     path: ../../packages/thus_network
   thus_storage:
     path: ../../packages/thus_storage
-  equatable: ^2.0.5
 
 dev_dependencies:
   build_runner: ^2.4.11
-  freezed: ^2.4.6
-  injectable_generator: ^2.4.1
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^6.0.0
+  freezed: ^2.4.6
+  injectable_generator: ^2.4.1
   very_good_analysis: ^6.0.0
 
 flutter:
