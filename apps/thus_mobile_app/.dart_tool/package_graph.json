@@ -145,9 +145,10 @@
       "name": "thus_network",
       "version": "1.0.0",
       "dependencies": [
-        "dio",
         "equatable",
         "get_it",
+        "http",
+        "http_interceptor",
         "injectable",
         "stream_transform",
         "thus_core",
@@ -696,16 +697,10 @@
       ]
     },
     {
-      "name": "dio",
-      "version": "5.9.2",
+      "name": "http_interceptor",
+      "version": "2.0.0",
       "dependencies": [
-        "async",
-        "collection",
-        "dio_web_adapter",
-        "http_parser",
-        "meta",
-        "mime",
-        "path"
+        "http"
       ]
     },
     {
@@ -914,16 +909,6 @@
       ]
     },
     {
-      "name": "dio_web_adapter",
-      "version": "2.1.2",
-      "dependencies": [
-        "dio",
-        "http_parser",
-        "meta",
-        "web"
-      ]
-    },
-    {
       "name": "ffi",
       "version": "2.2.0",
       "dependencies": []
@@ -1008,6 +993,16 @@
       "dependencies": [
         "collection",
         "hooks"
+      ]
+    },
+    {
+      "name": "http",
+      "version": "1.6.0",
+      "dependencies": [
+        "async",
+        "http_parser",
+        "meta",
+        "web"
       ]
     }
   ],

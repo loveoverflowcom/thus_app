@@ -1,5 +1,5 @@
 name: thus_network
-description: Networking (REST, WebSocket, SSE) layer for Thus apps using Dio.
+description: Networking (REST, WebSocket, SSE) layer for Thus apps using http.
 version: 1.0.0
 publish_to: none
 
@@ -7,9 +7,10 @@ environment:
   sdk: ^3.10.3
 
 dependencies:
-  dio: ^5.4.1
   equatable: ^2.0.5
   get_it: ^7.6.0
+  http: ^1.2.1
+  http_interceptor: ^2.0.0
   injectable: ^2.3.5
   stream_transform: ^2.1.0
   thus_core:

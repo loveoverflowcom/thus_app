@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:thus_core/thus_core.dart';
 import 'package:thus_messaging/thus_messaging.dart';
 
 import '../../di/di.dart';
@@ -114,10 +115,22 @@ class _ChatViewState extends State<_ChatView> {
                         return;
                       }
 
+                      final String receiverId = widget.conversationId.trim();
+                      if (!isUuid(receiverId)) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Target user id must be a UUID, not a username.',
+                            ),
+                          ),
+                        );
+                        return;
+                      }
+
                       _controller.clear();
                       context.read<ChatBloc>().add(
                         SendChatMessage(
-                          receiverId: widget.conversationId,
+                          receiverId: receiverId,
                           content: content,
                         ),
                       );

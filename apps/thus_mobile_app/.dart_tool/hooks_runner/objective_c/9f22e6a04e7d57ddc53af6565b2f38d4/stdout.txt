@@ -1,0 +1,55 @@
+Running `(cd /Users/manhblue/.pub-cache/hosted/pub.dev/objective_c-9.3.0/; TMPDIR=/var/folders/gz/06n8b6x93qd6t2k8n0zsj5fc0000gn/T/ PATH=/Applications/Xcode.app/Contents/SharedFrameworks/SwiftBuild.framework/Versions/A/PlugIns/SWBBuildService.bundle/Contents/PlugIns/SWBUniversalPlatformPlugin.bundle/Contents/Frameworks/SWBUniversalPlatform.framework/Resources:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/local/bin:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/libexec:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/usr/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/usr/local/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/local/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/local/bin:/opt/homebrew/opt/mysql-client/bin:/usr/local/mysql-9.6.0-macos15-arm64/bin:/Users/manhblue/.rbenv/shims:/opt/homebrew/opt/openjdk/bin:/Users/manhblue/development/flutter/bin/:/Library/Frameworks/Python.framework/Versions/3.14/bin:/Users/manhblue/.elan/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Users/manhblue/.sdkman/candidates/kotlin/current/bin:/Users/manhblue/.sdkman/candidates/java/current/bin:/Users/manhblue/.cargo/bin:/Users/manhblue/development/flutter/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/manhblue/Library/Android/sdk/platform-tools:/Users/manhblue/.pub-cache/bin HOME=/Users/manhblue /Users/manhblue/development/flutter/bin/cache/dart-sdk/bin/dart --packages=/Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/package_config.json /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/objective_c/9f22e6a04e7d57ddc53af6565b2f38d4/hook.dill --config=/Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/objective_c/9f22e6a04e7d57ddc53af6565b2f38d4/input.json )`.
+INFO: 2026-03-20 08:55:38.569207: Running `/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang --version`.
+
+INFO: 2026-03-20 08:55:38.583469: Running `/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang --version`.
+
+INFO: 2026-03-20 08:55:38.595203: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -target arm64-apple-ios-simulator -mios-version-min=12 -c /Users/manhblue/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/include/dart_api_dl.c -fpic -I src -o /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/include/dart_api_dl.c.o
+
+INFO: 2026-03-20 08:55:38.595681: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -target arm64-apple-ios-simulator -mios-version-min=12 -x objective-c -fobjc-arc -c /Users/manhblue/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/input_stream_adapter.m -fpic -I src -o /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/input_stream_adapter.m.o
+
+INFO: 2026-03-20 08:55:38.595977: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -target arm64-apple-ios-simulator -mios-version-min=12 -x objective-c -fobjc-arc -c /Users/manhblue/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/ns_number.m -fpic -I src -o /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/ns_number.m.o
+
+.o
+INFO: 2026-03-20 08:55:38.595889: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -target arm64-apple-ios-simulator -mios-version-min=12 -x objective-c -fobjc-arc -c /Users/manhblue/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/observer.m -fpic -I src -o /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/observer.m.o
+
+INFO: 2026-03-20 08:55:38.596060: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -target arm64-apple-ios-simulator -mios-version-min=12 -x objective-c -fobjc-arc -c /Users/manhblue/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/protocol.m -fpic -I src -o /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/protocol.m.o
+
+INFO: 2026-03-20 08:55:38.596151: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -target arm64-apple-ios-simulator -mios-version-min=12 -x objective-c -fobjc-arc -c /Users/manhblue/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/objective_c_bindings_generated.m -fpic -I src -o /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/objective_c_bindings_generated.m.o
+
+INFO: 2026-03-20 08:55:38.640269: Generated /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/include/dart_api_dl.c.o
+
+INFO: 2026-03-20 08:55:38.640497: 
+INFO: 2026-03-20 08:55:38.640521: 
+INFO: 2026-03-20 08:55:38.640531: Generated /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/objective_c.c.o
+
+INFO: 2026-03-20 08:55:38.647255: 
+INFO: 2026-03-20 08:55:38.647288: 
+INFO: 2026-03-20 08:55:38.647298: Generated /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/observer.m.o
+
+INFO: 2026-03-20 08:55:38.649725: 
+INFO: 2026-03-20 08:55:38.649748: 
+INFO: 2026-03-20 08:55:38.649758: Generated /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/protocol.m.o
+
+INFO: 2026-03-20 08:55:38.704376: 
+INFO: 2026-03-20 08:55:38.704426: 
+INFO: 2026-03-20 08:55:38.704445: Generated /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/ns_number.m.o
+
+INFO: 2026-03-20 08:55:38.708791: 
+INFO: 2026-03-20 08:55:38.708859: 
+INFO: 2026-03-20 08:55:38.708879: Generated /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/input_stream_adapter.m.o
+
+INFO: 2026-03-20 08:55:38.717609: 
+INFO: 2026-03-20 08:55:38.717668: 
+INFO: 2026-03-20 08:55:38.717688: Generated /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/objective_c.m.o
+
+INFO: 2026-03-20 08:55:38.733825: 
+INFO: 2026-03-20 08:55:38.733867: 
+INFO: 2026-03-20 08:55:38.733877: Generated /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/objective_c_bindings_generated.m.o
+
+INFO: 2026-03-20 08:55:38.734190: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -shared -Wl,-encryptable -undefined dynamic_lookup -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -target arm64-apple-ios-simulator -mios-version-min=12 /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/include/dart_api_dl.c.o /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/objective_c.c.o /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/input_stream_adapter.m.o /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/objective_c.m.o /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/observer.m.o /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/ns_number.m.o /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/protocol.m.o /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/obj/src/objective_c_bindings_generated.m.o -o /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/objective_c.dylib
+
+INFO: 2026-03-20 08:55:38.772287: 
+INFO: 2026-03-20 08:55:38.772350: ld: warning: -undefined dynamic_lookup is deprecated on iOS-simulator
+
+INFO: 2026-03-20 08:55:38.772361: Generated /Users/manhblue/Documents/personal/open_source/thus_app/apps/thus_mobile_app/.dart_tool/hooks_runner/shared/objective_c/build/9f22e6a04e/objective_c.dylib
+

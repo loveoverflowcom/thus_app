@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thus_auth/thus_auth.dart';
@@ -19,15 +21,129 @@ class ChatListPage extends StatefulWidget {
 
 class _ChatListPageState extends State<ChatListPage> {
   final TextEditingController _targetUserController = TextEditingController();
+  StreamSubscription<Message>? _incomingSubscription;
+  Timer? _incomingReconnectTimer;
+  bool _isConnectingIncomingStream = false;
+  String? _targetUserErrorText;
+
+  @override
+  void initState() {
+    super.initState();
+    _listenForIncomingMessages();
+  }
 
   @override
   void dispose() {
+    _incomingSubscription?.cancel();
+    _incomingReconnectTimer?.cancel();
     _targetUserController.dispose();
     super.dispose();
   }
 
   Future<List<Chat>> _loadChats() {
-    return sl<LoadChats>()(const NoParams());
+    return sl<MessageRepository>().loadChats();
+  }
+
+  Future<void> _listenForIncomingMessages({bool showError = true}) async {
+    if (_isConnectingIncomingStream) {
+      return;
+    }
+
+    _isConnectingIncomingStream = true;
+    try {
+      final Stream<Message> stream = sl<MessageRepository>().incoming();
+      if (!mounted) {
+        return;
+      }
+
+      _incomingSubscription = stream.listen(
+        (_) {
+          if (!mounted) {
+            return;
+          }
+          setState(() {});
+        },
+        onError: (Object error, StackTrace stackTrace) {
+          _handleIncomingStreamInterrupted(
+            message: 'Live updates disconnected: $error',
+          );
+        },
+        onDone: _handleIncomingStreamInterrupted,
+        cancelOnError: true,
+      );
+    } on Object catch (error) {
+      if (!mounted) {
+        return;
+      }
+
+      if (showError) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted) {
+            return;
+          }
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Unable to start live updates: $error')),
+          );
+        });
+      }
+      _scheduleIncomingReconnect();
+    } finally {
+      _isConnectingIncomingStream = false;
+    }
+  }
+
+  void _handleIncomingStreamInterrupted({String? message}) {
+    if (!mounted) {
+      return;
+    }
+
+    _incomingSubscription = null;
+    if (message != null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
+    }
+    _scheduleIncomingReconnect();
+  }
+
+  void _scheduleIncomingReconnect() {
+    _incomingReconnectTimer?.cancel();
+    _incomingReconnectTimer = Timer(const Duration(seconds: 3), () {
+      if (!mounted) {
+        return;
+      }
+      _listenForIncomingMessages(showError: false);
+    });
+  }
+
+  static const String _targetUserIdErrorMessage =
+      'Target user id must be a UUID, not a username.';
+
+  void _openChat() {
+    final String peerUserId = _targetUserController.text.trim();
+    if (peerUserId.isEmpty) {
+      setState(() {
+        _targetUserErrorText = 'Please enter a target user UUID.';
+      });
+      return;
+    }
+
+    if (!isUuid(peerUserId)) {
+      setState(() {
+        _targetUserErrorText = _targetUserIdErrorMessage;
+      });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text(_targetUserIdErrorMessage)));
+      return;
+    }
+
+    setState(() {
+      _targetUserErrorText = null;
+    });
+    Navigator.of(context)
+        .pushNamed(ChatPage.route, arguments: peerUserId)
+        .then((_) => setState(() {}));
   }
 
   @override
@@ -80,22 +196,25 @@ class _ChatListPageState extends State<ChatListPage> {
                 const SizedBox(height: 16),
                 TextField(
                   controller: _targetUserController,
-                  decoration: const InputDecoration(
-                    labelText: 'Open chat by target user id',
-                    hintText: 'e.g. 8df1f8a9...',
+                  onChanged: (_) {
+                    if (_targetUserErrorText == null) {
+                      return;
+                    }
+
+                    setState(() {
+                      _targetUserErrorText = null;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Open chat by target user UUID',
+                    hintText: 'e.g. 115cd206-5696-4eb0-92c0-00f6d9a99408',
+                    helperText: 'The API expects user_id UUID, not username.',
+                    errorText: _targetUserErrorText,
                   ),
                 ),
                 const SizedBox(height: 12),
                 FilledButton(
-                  onPressed: () {
-                    final String peerUserId = _targetUserController.text.trim();
-                    if (peerUserId.isEmpty) {
-                      return;
-                    }
-                    Navigator.of(context)
-                        .pushNamed(ChatPage.route, arguments: peerUserId)
-                        .then((_) => setState(() {}));
-                  },
+                  onPressed: _openChat,
                   child: const Text('Open chat'),
                 ),
                 const SizedBox(height: 24),

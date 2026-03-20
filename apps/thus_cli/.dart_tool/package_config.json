@@ -32,18 +32,6 @@
       "languageVersion": "3.4"
     },
     {
-      "name": "dio",
-      "rootUri": "file:///Users/manhblue/.pub-cache/hosted/pub.dev/dio-5.9.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "dio_web_adapter",
-      "rootUri": "file:///Users/manhblue/.pub-cache/hosted/pub.dev/dio_web_adapter-2.1.2",
-      "packageUri": "lib/",
-      "languageVersion": "3.3"
-    },
-    {
       "name": "equatable",
       "rootUri": "file:///Users/manhblue/.pub-cache/hosted/pub.dev/equatable-2.0.8",
       "packageUri": "lib/",
@@ -66,6 +54,18 @@
       "rootUri": "file:///Users/manhblue/.pub-cache/hosted/pub.dev/hive_ce-2.19.3",
       "packageUri": "lib/",
       "languageVersion": "3.4"
+    },
+    {
+      "name": "http",
+      "rootUri": "file:///Users/manhblue/.pub-cache/hosted/pub.dev/http-1.6.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "http_interceptor",
+      "rootUri": "file:///Users/manhblue/.pub-cache/hosted/pub.dev/http_interceptor-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "http_parser",
@@ -102,12 +102,6 @@
       "rootUri": "file:///Users/manhblue/.pub-cache/hosted/pub.dev/meta-1.17.0",
       "packageUri": "lib/",
       "languageVersion": "3.5"
-    },
-    {
-      "name": "mime",
-      "rootUri": "file:///Users/manhblue/.pub-cache/hosted/pub.dev/mime-2.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.2"
     },
     {
       "name": "path",

@@ -64,6 +64,13 @@ cd apps/thus_cli
 dart run bin/thus_cli.dart
 ```
 
+CLI help:
+```bash
+cd apps/thus_cli
+dart run bin/thus_cli.dart --help
+dart run bin/thus_cli.dart help /send
+```
+
 CLI one-shot examples:
 ```bash
 dart run bin/thus_cli.dart /register alice super-secret-password
@@ -72,6 +79,8 @@ dart run bin/thus_cli.dart /listen
 dart run bin/thus_cli.dart /send <target_user_id> "hello from thus"
 dart run bin/thus_cli.dart /chats
 ```
+
+Tài liệu chi tiết cho CLI nằm ở `apps/thus_cli/README.md`.
 
 ## Notes
 - Session local cache lưu `access_token`, `refresh_token`, `notification_token`, `user_id`, `username`.

@@ -8,11 +8,6 @@ import '../data/auth_remote_data_source.dart';
 import '../data/auth_repository.dart';
 import '../data/auth_repository_impl.dart';
 import '../domain/entities/auth_session.dart';
-import '../domain/usecases/load_session.dart';
-import '../domain/usecases/login.dart';
-import '../domain/usecases/logout.dart';
-import '../domain/usecases/refresh_session.dart';
-import '../domain/usecases/register_account.dart';
 import '../presentation/auth_bloc.dart';
 
 Future<void> registerAuthModule(GetIt getIt) async {
@@ -49,18 +44,7 @@ Future<void> registerAuthModule(GetIt getIt) async {
     );
   }
 
-  getIt.registerFactory(() => LoadSession(getIt<AuthRepository>()));
-  getIt.registerFactory(() => Login(getIt<AuthRepository>()));
-  getIt.registerFactory(() => RegisterAccount(getIt<AuthRepository>()));
-  getIt.registerFactory(() => RefreshSession(getIt<AuthRepository>()));
-  getIt.registerFactory(() => Logout(getIt<AuthRepository>()));
   getIt.registerFactory(
-    () => AuthBloc(
-      loadSession: getIt<LoadSession>(),
-      login: getIt<Login>(),
-      registerAccount: getIt<RegisterAccount>(),
-      refreshSession: getIt<RefreshSession>(),
-      logout: getIt<Logout>(),
-    ),
+    () => AuthBloc(authRepository: getIt<AuthRepository>()),
   );
 }

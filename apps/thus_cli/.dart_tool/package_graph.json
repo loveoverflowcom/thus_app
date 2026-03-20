@@ -44,9 +44,10 @@
       "name": "thus_network",
       "version": "1.0.0",
       "dependencies": [
-        "dio",
         "equatable",
         "get_it",
+        "http",
+        "http_interceptor",
         "injectable",
         "stream_transform",
         "thus_core",
@@ -143,24 +144,18 @@
       "dependencies": []
     },
     {
+      "name": "http_interceptor",
+      "version": "2.0.0",
+      "dependencies": [
+        "http"
+      ]
+    },
+    {
       "name": "equatable",
       "version": "2.0.8",
       "dependencies": [
         "collection",
         "meta"
-      ]
-    },
-    {
-      "name": "dio",
-      "version": "5.9.2",
-      "dependencies": [
-        "async",
-        "collection",
-        "dio_web_adapter",
-        "http_parser",
-        "meta",
-        "mime",
-        "path"
       ]
     },
     {
@@ -231,24 +226,21 @@
       ]
     },
     {
-      "name": "dio_web_adapter",
-      "version": "2.1.2",
+      "name": "typed_data",
+      "version": "1.4.0",
       "dependencies": [
-        "dio",
+        "collection"
+      ]
+    },
+    {
+      "name": "http",
+      "version": "1.6.0",
+      "dependencies": [
+        "async",
         "http_parser",
         "meta",
         "web"
       ]
-    },
-    {
-      "name": "path",
-      "version": "1.9.1",
-      "dependencies": []
-    },
-    {
-      "name": "mime",
-      "version": "2.0.0",
-      "dependencies": []
     },
     {
       "name": "http_parser",
@@ -258,13 +250,6 @@
         "source_span",
         "string_scanner",
         "typed_data"
-      ]
-    },
-    {
-      "name": "typed_data",
-      "version": "1.4.0",
-      "dependencies": [
-        "collection"
       ]
     },
     {
@@ -286,6 +271,11 @@
     {
       "name": "term_glyph",
       "version": "1.2.2",
+      "dependencies": []
+    },
+    {
+      "name": "path",
+      "version": "1.9.1",
       "dependencies": []
     }
   ],

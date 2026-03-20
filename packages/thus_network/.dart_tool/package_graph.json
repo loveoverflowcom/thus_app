@@ -7,9 +7,10 @@
       "name": "thus_network",
       "version": "1.0.0",
       "dependencies": [
-        "dio",
         "equatable",
         "get_it",
+        "http",
+        "http_interceptor",
         "injectable",
         "stream_transform",
         "thus_core",
@@ -87,16 +88,6 @@
       ]
     },
     {
-      "name": "thus_core",
-      "version": "1.0.0",
-      "dependencies": [
-        "equatable",
-        "get_it",
-        "injectable",
-        "meta"
-      ]
-    },
-    {
       "name": "web_socket_channel",
       "version": "2.4.5",
       "dependencies": [
@@ -104,6 +95,16 @@
         "crypto",
         "stream_channel",
         "web"
+      ]
+    },
+    {
+      "name": "thus_core",
+      "version": "1.0.0",
+      "dependencies": [
+        "equatable",
+        "get_it",
+        "injectable",
+        "meta"
       ]
     },
     {
@@ -117,6 +118,13 @@
       "dependencies": [
         "get_it",
         "meta"
+      ]
+    },
+    {
+      "name": "http_interceptor",
+      "version": "2.0.0",
+      "dependencies": [
+        "http"
       ]
     },
     {
@@ -134,19 +142,6 @@
       "dependencies": [
         "collection",
         "meta"
-      ]
-    },
-    {
-      "name": "dio",
-      "version": "5.9.2",
-      "dependencies": [
-        "async",
-        "collection",
-        "dio_web_adapter",
-        "http_parser",
-        "meta",
-        "mime",
-        "path"
       ]
     },
     {
@@ -433,26 +428,6 @@
       ]
     },
     {
-      "name": "dio_web_adapter",
-      "version": "2.1.2",
-      "dependencies": [
-        "dio",
-        "http_parser",
-        "meta",
-        "web"
-      ]
-    },
-    {
-      "name": "http_parser",
-      "version": "4.1.2",
-      "dependencies": [
-        "collection",
-        "source_span",
-        "string_scanner",
-        "typed_data"
-      ]
-    },
-    {
       "name": "source_span",
       "version": "1.10.2",
       "dependencies": [
@@ -499,6 +474,16 @@
       "version": "1.12.1",
       "dependencies": [
         "path"
+      ]
+    },
+    {
+      "name": "http_parser",
+      "version": "4.1.2",
+      "dependencies": [
+        "collection",
+        "source_span",
+        "string_scanner",
+        "typed_data"
       ]
     },
     {
@@ -559,6 +544,16 @@
       "dependencies": [
         "source_span",
         "string_scanner"
+      ]
+    },
+    {
+      "name": "http",
+      "version": "1.6.0",
+      "dependencies": [
+        "async",
+        "http_parser",
+        "meta",
+        "web"
       ]
     }
   ],

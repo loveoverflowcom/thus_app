@@ -9,6 +9,7 @@ import 'package:thus_storage/thus_storage.dart';
 import 'package:thus_cli/src/cli.dart';
 import 'package:thus_cli/src/commands/command_handler.dart';
 import 'package:thus_cli/src/commands/chats_command.dart';
+import 'package:thus_cli/src/commands/command_help.dart';
 import 'package:thus_cli/src/commands/listen_command.dart';
 import 'package:thus_cli/src/commands/login_command.dart';
 import 'package:thus_cli/src/commands/logout_command.dart';
@@ -16,8 +17,30 @@ import 'package:thus_cli/src/commands/register_command.dart';
 import 'package:thus_cli/src/commands/send_command.dart';
 
 final GetIt sl = GetIt.instance;
+const List<CommandHelp> _commandHelps = <CommandHelp>[
+  RegisterCommand.helpInfo,
+  LoginCommand.helpInfo,
+  LogoutCommand.helpInfo,
+  ChatsCommand.helpInfo,
+  SendCommand.helpInfo,
+  ListenCommand.helpInfo,
+];
 
 Future<void> main(List<String> args) async {
+  final String? helpTarget = Cli.standaloneHelpTarget(args, _commandHelps);
+  if (helpTarget != null) {
+    if (helpTarget.isEmpty) {
+      stdout.writeln(Cli.formatGeneralHelp(_commandHelps));
+      return;
+    }
+
+    final CommandHelp commandHelp = _commandHelps.firstWhere(
+      (CommandHelp help) => help.command == helpTarget,
+    );
+    stdout.writeln(commandHelp.formatDetails());
+    return;
+  }
+
   await configureCoreDependencies();
   await registerStorageModule(sl);
 
@@ -34,12 +57,12 @@ Future<void> main(List<String> args) async {
   await registerMessagingModule(sl);
 
   final Cli cli = Cli(<CommandHandler>[
-    LoginCommand(sl<Login>()),
-    RegisterCommand(sl<RegisterAccount>()),
-    LogoutCommand(sl<Logout>()),
-    ChatsCommand(sl<LoadChats>(), sl<LoadChatHistory>()),
-    SendCommand(sl<SendMessage>(), sl<LoadSession>()),
-    ListenCommand(sl<ReceiveMessage>()),
+    LoginCommand(sl<AuthRepository>()),
+    RegisterCommand(sl<AuthRepository>()),
+    LogoutCommand(sl<AuthRepository>()),
+    ChatsCommand(sl<MessageRepository>()),
+    SendCommand(sl<MessageRepository>(), sl<AuthRepository>()),
+    ListenCommand(sl<MessageRepository>()),
   ]);
 
   await cli.run(args);

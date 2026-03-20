@@ -1,24 +1,28 @@
 import 'dart:io';
 
 import 'package:thus_auth/thus_auth.dart';
-import 'package:thus_core/thus_core.dart';
 
 import 'command_handler.dart';
+import 'command_help.dart';
 
-class LogoutCommand implements CommandHandler {
-  LogoutCommand(this._logout);
+class LogoutCommand extends CommandHandler {
+  LogoutCommand(this._authRepository);
 
-  final Logout _logout;
+  static const CommandHelp helpInfo = CommandHelp(
+    command: '/logout',
+    usage: '/logout',
+    summary: 'Clear the locally stored session.',
+    examples: <String>['/logout'],
+  );
+
+  final AuthRepository _authRepository;
 
   @override
-  String get command => '/logout';
-
-  @override
-  String get description => '/logout - clear local session';
+  CommandHelp get help => helpInfo;
 
   @override
   Future<void> handle(List<String> args) async {
-    await _logout(const NoParams());
+    await _authRepository.logout();
     stdout.writeln('Local session cleared.');
   }
 }

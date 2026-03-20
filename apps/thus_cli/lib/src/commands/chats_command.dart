@@ -1,27 +1,29 @@
 import 'dart:io';
 
-import 'package:thus_core/thus_core.dart';
 import 'package:thus_messaging/thus_messaging.dart';
 
 import 'command_handler.dart';
+import 'command_help.dart';
 
-class ChatsCommand implements CommandHandler {
-  ChatsCommand(this._loadChats, this._loadChatHistory);
+class ChatsCommand extends CommandHandler {
+  ChatsCommand(this._messageRepository);
 
-  final LoadChats _loadChats;
-  final LoadChatHistory _loadChatHistory;
+  static const CommandHelp helpInfo = CommandHelp(
+    command: '/chats',
+    usage: '/chats [conversation_id]',
+    summary: 'List cached chats or print one cached conversation.',
+    examples: <String>['/chats', '/chats <conversation_id>'],
+  );
+
+  final MessageRepository _messageRepository;
 
   @override
-  String get command => '/chats';
-
-  @override
-  String get description =>
-      '/chats [target_user_id] - list cached chats or one conversation';
+  CommandHelp get help => helpInfo;
 
   @override
   Future<void> handle(List<String> args) async {
     if (args.isEmpty) {
-      final List<Chat> chats = await _loadChats(const NoParams());
+      final List<Chat> chats = await _messageRepository.loadChats();
       if (chats.isEmpty) {
         stdout.writeln('No cached chats yet.');
         return;
@@ -36,7 +38,9 @@ class ChatsCommand implements CommandHandler {
     }
 
     final String conversationId = args.first;
-    final List<Message> history = await _loadChatHistory(conversationId);
+    final List<Message> history = await _messageRepository.loadHistory(
+      conversationId,
+    );
     if (history.isEmpty) {
       stdout.writeln('No messages in $conversationId');
       return;

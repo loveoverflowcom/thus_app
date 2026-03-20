@@ -37,15 +37,23 @@ class MessageRepositoryImpl implements MessageRepository {
     required String content,
     String source = 'thus_cli',
   }) async {
+    final String normalizedToUserId = toUserId.trim();
+    if (!isUuid(normalizedToUserId)) {
+      throw FormatException(
+        'Target user id must be a UUID. Received "$toUserId". '
+        'The server does not accept usernames in to_user_id.',
+      );
+    }
+
     final AuthSession session = await _requireSession();
     final Message draft = Message(
       id: 'local-${DateTime.now().microsecondsSinceEpoch}',
       senderId: session.userId,
-      receiverId: toUserId,
+      receiverId: normalizedToUserId,
       timestamp: DateTime.now().toUtc(),
       content: content,
       status: MessageStatus.sending,
-      conversationId: toUserId,
+      conversationId: normalizedToUserId,
       source: source,
       isIncoming: false,
     );
@@ -55,7 +63,7 @@ class MessageRepositoryImpl implements MessageRepository {
     final Map<String, dynamic>? response = await _restClient.postJson(
       AppConstants.sendMessagePath,
       data: <String, dynamic>{
-        'to_user_id': toUserId,
+        'to_user_id': normalizedToUserId,
         'event': draft.eventName,
         'payload': <String, dynamic>{'body': content, 'source': source},
       },
@@ -81,7 +89,24 @@ class MessageRepositoryImpl implements MessageRepository {
 
   @override
   Stream<Message> incoming() {
-    return _incomingStream ??= _buildIncomingStream().asBroadcastStream();
+    final Stream<Message>? existingStream = _incomingStream;
+    if (existingStream != null) {
+      return existingStream;
+    }
+
+    late final Stream<Message> stream;
+    stream = (() async* {
+      try {
+        yield* _buildIncomingStream();
+      } finally {
+        if (identical(_incomingStream, stream)) {
+          _incomingStream = null;
+        }
+      }
+    })().asBroadcastStream();
+
+    _incomingStream = stream;
+    return stream;
   }
 
   @override
@@ -186,10 +211,20 @@ class MessageRepositoryImpl implements MessageRepository {
       return <Message>[];
     }
 
-    if (event.event == 'system.ready' && decoded is Map<String, dynamic>) {
-      final List<dynamic> replayed =
-          decoded['replayed_messages'] as List<dynamic>? ?? <dynamic>[];
-      return replayed
+    final Map<String, dynamic>? decodedMap = _castJsonMap(decoded);
+    if (event.event == 'system.ready' && decodedMap != null) {
+      final Object? rawReplayedMessages = decodedMap['replayed_messages'];
+      final List<dynamic>? replayed = _castJsonList(rawReplayedMessages);
+      if (rawReplayedMessages != null && replayed == null) {
+        _logger.log(
+          'Ignoring system.ready replayed_messages with unexpected type '
+          '${rawReplayedMessages.runtimeType}.',
+          level: LogLevel.warning,
+        );
+        return <Message>[];
+      }
+
+      return (replayed ?? const <dynamic>[])
           .map(
             (dynamic raw) => _mapPayloadToMessage(
               raw: raw,
@@ -343,6 +378,18 @@ class MessageRepositoryImpl implements MessageRepository {
       return raw.map(
         (Object? key, Object? value) => MapEntry(key.toString(), value),
       );
+    }
+
+    return null;
+  }
+
+  List<dynamic>? _castJsonList(Object? raw) {
+    if (raw is List<dynamic>) {
+      return raw;
+    }
+
+    if (raw is Iterable) {
+      return raw.toList(growable: false);
     }
 
     return null;

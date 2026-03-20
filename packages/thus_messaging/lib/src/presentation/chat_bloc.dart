@@ -3,25 +3,20 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '../data/message_repository.dart';
 import '../domain/entities/message.dart';
-import '../domain/usecases/load_chat_history.dart';
-import '../domain/usecases/send_message.dart';
-import '../domain/usecases/subscribe_chat_stream.dart';
 
 part 'chat_event.dart';
 part 'chat_state.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
-  ChatBloc(this._loadChatHistory, this._sendMessage, this._subscribe)
-    : super(const ChatState.initial()) {
+  ChatBloc(this._messageRepository) : super(const ChatState.initial()) {
     on<LoadConversation>(_onLoadConversation);
     on<SendChatMessage>(_onSendMessage);
     on<ChatMessageReceived>(_onMessageReceived);
   }
 
-  final LoadChatHistory _loadChatHistory;
-  final SendMessage _sendMessage;
-  final SubscribeChatStream _subscribe;
+  final MessageRepository _messageRepository;
 
   StreamSubscription<Message>? _subscription;
 
@@ -38,13 +33,15 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     );
 
     try {
-      final List<Message> history = await _loadChatHistory(
+      final List<Message> history = await _messageRepository.loadHistory(
         event.conversationId,
       );
       emit(state.copyWith(status: ChatStatus.ready, messages: history));
 
       await _subscription?.cancel();
-      final Stream<Message> stream = await _subscribe(event.conversationId);
+      final Stream<Message> stream = _messageRepository.subscribe(
+        event.conversationId,
+      );
       _subscription = stream.listen(
         (Message message) => add(ChatMessageReceived(message)),
         onError: addError,
@@ -65,12 +62,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     Emitter<ChatState> emit,
   ) async {
     try {
-      final Message persisted = await _sendMessage(
-        SendMessageParams(
-          toUserId: event.receiverId,
-          content: event.content,
-          source: event.source,
-        ),
+      final Message persisted = await _messageRepository.send(
+        toUserId: event.receiverId,
+        content: event.content,
+        source: event.source,
       );
 
       add(ChatMessageReceived(persisted));

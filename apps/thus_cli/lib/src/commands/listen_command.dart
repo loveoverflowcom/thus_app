@@ -1,21 +1,24 @@
 import 'dart:io';
 
-import 'package:thus_core/thus_core.dart';
 import 'package:thus_messaging/thus_messaging.dart';
 
 import 'command_handler.dart';
+import 'command_help.dart';
 
-class ListenCommand implements CommandHandler {
-  ListenCommand(this._receiveMessage);
+class ListenCommand extends CommandHandler {
+  ListenCommand(this._messageRepository);
 
-  final ReceiveMessage _receiveMessage;
+  static const CommandHelp helpInfo = CommandHelp(
+    command: '/listen',
+    usage: '/listen',
+    summary: 'Keep the SSE stream open and print incoming messages.',
+    examples: <String>['/listen'],
+  );
+
+  final MessageRepository _messageRepository;
 
   @override
-  String get command => '/listen';
-
-  @override
-  String get description =>
-      '/listen - keep SSE open and print incoming messages';
+  CommandHelp get help => helpInfo;
 
   @override
   Future<void> handle(List<String> args) async {
@@ -23,7 +26,7 @@ class ListenCommand implements CommandHandler {
       'Listening for incoming SSE messages. Press Ctrl+C to stop.',
     );
 
-    final Stream<Message> stream = await _receiveMessage(const NoParams());
+    final Stream<Message> stream = _messageRepository.incoming();
     await for (final Message message in stream) {
       stdout.writeln(
         '[${message.timestamp.toIso8601String()}] ${message.senderId} -> ${message.receiverId}: ${message.content}',
