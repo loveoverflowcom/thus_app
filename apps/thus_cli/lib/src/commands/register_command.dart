@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:thus_auth/thus_auth.dart';
 
-import 'command_handler.dart';
-import 'command_help.dart';
+import 'package:thus_cli/src/commands/command_handler.dart';
+import 'package:thus_cli/src/commands/command_help.dart';
 
 class RegisterCommand extends CommandHandler {
   RegisterCommand(this._authRepository);
@@ -27,13 +27,17 @@ class RegisterCommand extends CommandHandler {
       return;
     }
 
-    final AuthSession session = await _authRepository.register(
-      AuthCredentials(
-        username: args.first,
-        password: args.sublist(1).join(' '),
-      ),
-    );
+    final result = await _authRepository
+        .register(
+          username: args.first,
+          password: args.sublist(1).join(' '),
+        )
+        .run();
 
-    stdout.writeln('Registered as ${session.username} (${session.userId})');
+    result.match(
+      (failure) => stdout.writeln('Registration failed: $failure'),
+      (session) => stdout
+          .writeln('Registered as ${session.username} (${session.userId})'),
+    );
   }
 }

@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:thus_core/thus_core.dart';
 
-import 'sse_event.dart';
+import 'package:thus_network/src/sse_event.dart';
 
 class SseClient {
   SseClient({

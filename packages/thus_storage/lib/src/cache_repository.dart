@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:hive_ce/hive.dart';
 
-import 'hive_initializer.dart';
+import 'package:thus_storage/src/hive_initializer.dart';
 
 typedef JsonDecoder<T> = T Function(Map<String, dynamic> json);
 typedef JsonEncoder<T> = Map<String, dynamic> Function(T value);
@@ -74,5 +74,27 @@ class CacheRepository<T> {
 
   T _decodeRequired(String raw) {
     return _decode(raw)!;
+  }
+}
+
+/// Factory helper to create typed cache repositories on demand.
+final class CacheRepositoryFactory {
+  CacheRepositoryFactory(this._initializer);
+
+  final HiveInitializer _initializer;
+
+  CacheRepository<T> box<T>(
+    String name, {
+    required JsonDecoder<T> fromJson,
+    required JsonEncoder<T> toJson,
+    bool encrypted = false,
+  }) {
+    return CacheRepository<T>(
+      _initializer,
+      boxName: name,
+      fromJson: fromJson,
+      toJson: toJson,
+      encrypted: encrypted,
+    );
   }
 }

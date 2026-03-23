@@ -1,8 +1,8 @@
 import 'package:thus_core/thus_core.dart';
 import 'package:thus_network/thus_network.dart';
 
-import '../domain/entities/auth_credentials.dart';
-import '../domain/entities/auth_session.dart';
+import 'package:thus_auth/src/data/models/auth_credentials.dart';
+import 'package:thus_auth/src/data/models/auth_session.dart';
 
 class AuthRemoteDataSource {
   AuthRemoteDataSource({

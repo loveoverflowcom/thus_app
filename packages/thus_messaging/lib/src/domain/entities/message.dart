@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'message_status.dart';
+import 'package:thus_messaging/src/domain/entities/message_status.dart';
 
 part 'message.freezed.dart';
 part 'message.g.dart';

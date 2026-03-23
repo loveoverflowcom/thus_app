@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'app.dart';
-import 'di/di.dart';
+import 'package:thus_mobile_app/app.dart';
 
-Future<void> main() async {
-  await configureAppDependencies();
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const ThusApp());
 }

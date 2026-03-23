@@ -1,6 +1,6 @@
 import 'package:thus_storage/thus_storage.dart';
 
-import '../domain/entities/auth_session.dart';
+import 'package:thus_auth/src/data/models/auth_session.dart';
 
 class AuthLocalDataSource {
   AuthLocalDataSource(this._cacheRepository);

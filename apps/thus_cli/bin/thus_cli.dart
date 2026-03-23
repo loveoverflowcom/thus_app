@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:get_it/get_it.dart';
 import 'package:thus_auth/thus_auth.dart';
 import 'package:thus_core/thus_core.dart';
 import 'package:thus_messaging/thus_messaging.dart';
@@ -16,7 +15,6 @@ import 'package:thus_cli/src/commands/logout_command.dart';
 import 'package:thus_cli/src/commands/register_command.dart';
 import 'package:thus_cli/src/commands/send_command.dart';
 
-final GetIt sl = GetIt.instance;
 const List<CommandHelp> _commandHelps = <CommandHelp>[
   RegisterCommand.helpInfo,
   LoginCommand.helpInfo,
@@ -33,7 +31,6 @@ Future<void> main(List<String> args) async {
       stdout.writeln(Cli.formatGeneralHelp(_commandHelps));
       return;
     }
-
     final CommandHelp commandHelp = _commandHelps.firstWhere(
       (CommandHelp help) => help.command == helpTarget,
     );
@@ -41,29 +38,67 @@ Future<void> main(List<String> args) async {
     return;
   }
 
-  await configureCoreDependencies();
-  await registerStorageModule(sl);
+  const logger = AppLogger();
+  final httpClient = buildHttpClient(logger: logger);
 
   final String homeDirectory =
       Platform.environment['HOME'] ?? Directory.current.path;
-  await sl<HiveInitializer>().init(storagePath: '$homeDirectory/.thus_cli');
+  final hiveInitializer = HiveInitializer(logger: logger);
+  await hiveInitializer.init(storagePath: '$homeDirectory/.thus_cli');
 
-  await registerNetworkModule(
-    sl,
-    baseUrl:
-        Platform.environment['THUS_BASE_URL'] ?? AppConstants.defaultApiBaseUrl,
+  final cacheFactory = CacheRepositoryFactory(hiveInitializer);
+  final baseUrl = Platform.environment['THUS_BASE_URL'] ??
+      AppConstants.defaultApiBaseUrl;
+
+  final restClient = RestClient(
+    baseUrl: baseUrl,
+    client: httpClient,
+    logger: logger,
   );
-  await registerAuthModule(sl);
-  await registerMessagingModule(sl);
+  final sseClient = SseClient(
+    baseUrl: baseUrl,
+    client: httpClient,
+    logger: logger,
+  );
+
+  final authLocalDataSource = AuthLocalDataSource(
+    cacheFactory.box<AuthSession>(
+      'auth_session',
+      fromJson: AuthSession.fromJson,
+      toJson: (s) => s.toJson(),
+      encrypted: true,
+    ),
+  );
+  final authRemoteDataSource = AuthRemoteDataSource(
+    restClient: restClient,
+    logger: logger,
+  );
+  final AuthRepository authRepository = AuthRepositoryImpl(
+    localDataSource: authLocalDataSource,
+    remoteDataSource: authRemoteDataSource,
+  );
+
+  final MessageRepository messageRepository = MessageRepositoryImpl(
+    restClient: restClient,
+    sseClient: sseClient,
+    cache: cacheFactory.box<Message>(
+      'messages',
+      fromJson: Message.fromJson,
+      toJson: (m) => m.toJson(),
+    ),
+    authRepository: authRepository,
+    logger: logger,
+  );
 
   final Cli cli = Cli(<CommandHandler>[
-    LoginCommand(sl<AuthRepository>()),
-    RegisterCommand(sl<AuthRepository>()),
-    LogoutCommand(sl<AuthRepository>()),
-    ChatsCommand(sl<MessageRepository>()),
-    SendCommand(sl<MessageRepository>(), sl<AuthRepository>()),
-    ListenCommand(sl<MessageRepository>()),
+    LoginCommand(authRepository),
+    RegisterCommand(authRepository),
+    LogoutCommand(authRepository),
+    ChatsCommand(messageRepository),
+    SendCommand(messageRepository, authRepository),
+    ListenCommand(messageRepository),
   ]);
 
   await cli.run(args);
+  messageRepository.dispose();
 }

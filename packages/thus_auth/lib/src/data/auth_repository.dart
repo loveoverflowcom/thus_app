@@ -1,10 +1,18 @@
-import '../domain/entities/auth_credentials.dart';
-import '../domain/entities/auth_session.dart';
+import 'package:fpdart/fpdart.dart';
+
+import 'package:thus_auth/src/data/models/auth_session.dart';
+import 'package:thus_auth/src/data/models/auth_failure.dart';
 
 abstract class AuthRepository {
-  Future<AuthSession?> loadSession();
-  Future<AuthSession> login(AuthCredentials credentials);
-  Future<AuthSession> register(AuthCredentials credentials);
-  Future<AuthSession> refreshSession();
-  Future<void> logout();
+  TaskEither<AuthFailure, AuthSession?> loadSession();
+  TaskEither<AuthFailure, AuthSession> login({
+    required String username,
+    required String password,
+  });
+  TaskEither<AuthFailure, AuthSession> register({
+    required String username,
+    required String password,
+  });
+  TaskEither<AuthFailure, AuthSession> refreshSession();
+  TaskEither<AuthFailure, void> logout();
 }

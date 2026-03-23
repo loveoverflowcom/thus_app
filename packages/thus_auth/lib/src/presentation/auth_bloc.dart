@@ -1,97 +1,149 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../data/auth_repository.dart';
-import '../domain/entities/auth_credentials.dart';
-import '../domain/entities/auth_session.dart';
+import 'package:thus_auth/src/data/auth_repository.dart';
+import 'package:thus_auth/src/data/models/auth_failure.dart';
+import 'package:thus_auth/src/data/models/auth_session.dart';
 
-part 'auth_event.dart';
-part 'auth_state.dart';
+part 'auth_bloc.freezed.dart';
 
-class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc({required AuthRepository authRepository})
-    : _authRepository = authRepository,
-      super(const AuthState.initial()) {
-    on<AppStarted>(_onAppStarted);
-    on<LoginSubmitted>(_onLoginSubmitted);
-    on<RegisterSubmitted>(_onRegisterSubmitted);
-    on<RefreshRequested>(_onRefreshRequested);
-    on<LogoutRequested>(_onLogoutRequested);
+// ─────────────────────────────
+// Event
+// ─────────────────────────────
+
+@Freezed(copyWith: false)
+sealed class AuthEvent with _$AuthEvent {
+  const factory AuthEvent.started() = _Started;
+  const factory AuthEvent.loginSubmitted({
+    required String username,
+    required String password,
+  }) = _LoginSubmitted;
+  const factory AuthEvent.registerSubmitted({
+    required String username,
+    required String password,
+  }) = _RegisterSubmitted;
+  const factory AuthEvent.refreshRequested() = _RefreshRequested;
+  const factory AuthEvent.logoutRequested() = _LogoutRequested;
+}
+
+// ─────────────────────────────
+// State
+// ─────────────────────────────
+
+@freezed
+sealed class AuthState with _$AuthState {
+  const factory AuthState({
+    @Default(AuthStatus.initial) AuthStatus status,
+    AuthSession? session,
+    String? message,
+  }) = _AuthState;
+}
+
+enum AuthStatus {
+  initial,
+  loading,
+  authenticated,
+  unauthenticated,
+  failure;
+
+  bool get isLoading => this == loading;
+  bool get isAuthenticated => this == authenticated;
+  bool get isUnauthenticated => this == unauthenticated;
+  bool get isFailure => this == failure;
+}
+
+// ─────────────────────────────
+// Bloc
+// ─────────────────────────────
+
+final class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  AuthBloc(this._repository) : super(const AuthState()) {
+    on<_Started>(_onStarted);
+    on<_LoginSubmitted>(_onLoginSubmitted);
+    on<_RegisterSubmitted>(_onRegisterSubmitted);
+    on<_RefreshRequested>(_onRefreshRequested);
+    on<_LogoutRequested>(_onLogoutRequested);
   }
 
-  final AuthRepository _authRepository;
+  final AuthRepository _repository;
 
-  Future<void> _onAppStarted(AppStarted event, Emitter<AuthState> emit) async {
-    emit(const AuthState.loading());
-
-    final AuthSession? session = await _authRepository.loadSession();
-    if (session == null) {
-      emit(const AuthState.unauthenticated());
-      return;
-    }
-
-    emit(AuthState.authenticated(session));
+  Future<void> _onStarted(_Started event, Emitter<AuthState> emit) async {
+    emit(state.copyWith(status: AuthStatus.loading));
+    final result = await _repository.loadSession().run();
+    result.match(
+      (failure) => emit(
+        state.copyWith(
+          status: AuthStatus.unauthenticated,
+          message: _failureMessage(failure),
+        ),
+      ),
+      (session) => session != null
+          ? emit(state.copyWith(status: AuthStatus.authenticated, session: session))
+          : emit(state.copyWith(status: AuthStatus.unauthenticated)),
+    );
   }
 
   Future<void> _onLoginSubmitted(
-    LoginSubmitted event,
+    _LoginSubmitted event,
     Emitter<AuthState> emit,
   ) async {
-    await _authenticate(
-      emit: emit,
-      operation: () => _authRepository.login(
-        AuthCredentials(username: event.username, password: event.password),
+    emit(state.copyWith(status: AuthStatus.loading));
+    final result = await _repository
+        .login(username: event.username, password: event.password)
+        .run();
+    result.match(
+      (failure) => emit(
+        state.copyWith(status: AuthStatus.failure, message: _failureMessage(failure)),
       ),
+      (session) =>
+          emit(state.copyWith(status: AuthStatus.authenticated, session: session)),
     );
   }
 
   Future<void> _onRegisterSubmitted(
-    RegisterSubmitted event,
+    _RegisterSubmitted event,
     Emitter<AuthState> emit,
   ) async {
-    await _authenticate(
-      emit: emit,
-      operation: () => _authRepository.register(
-        AuthCredentials(username: event.username, password: event.password),
+    emit(state.copyWith(status: AuthStatus.loading));
+    final result = await _repository
+        .register(username: event.username, password: event.password)
+        .run();
+    result.match(
+      (failure) => emit(
+        state.copyWith(status: AuthStatus.failure, message: _failureMessage(failure)),
       ),
+      (session) =>
+          emit(state.copyWith(status: AuthStatus.authenticated, session: session)),
     );
   }
 
   Future<void> _onRefreshRequested(
-    RefreshRequested event,
+    _RefreshRequested event,
     Emitter<AuthState> emit,
   ) async {
-    emit(const AuthState.loading());
-
-    try {
-      final AuthSession refreshed = await _authRepository.refreshSession();
-      emit(AuthState.authenticated(refreshed));
-    } on Object catch (error, stackTrace) {
-      addError(error, stackTrace);
-      emit(AuthState.failure(error.toString()));
-    }
+    emit(state.copyWith(status: AuthStatus.loading));
+    final result = await _repository.refreshSession().run();
+    result.match(
+      (failure) => emit(
+        state.copyWith(status: AuthStatus.failure, message: _failureMessage(failure)),
+      ),
+      (session) =>
+          emit(state.copyWith(status: AuthStatus.authenticated, session: session)),
+    );
   }
 
   Future<void> _onLogoutRequested(
-    LogoutRequested event,
+    _LogoutRequested event,
     Emitter<AuthState> emit,
   ) async {
-    await _authRepository.logout();
-    emit(const AuthState.unauthenticated());
+    await _repository.logout().run();
+    emit(state.copyWith(status: AuthStatus.unauthenticated, session: null));
   }
 
-  Future<void> _authenticate({
-    required Emitter<AuthState> emit,
-    required Future<AuthSession> Function() operation,
-  }) async {
-    emit(const AuthState.loading());
-
-    try {
-      final AuthSession session = await operation();
-      emit(AuthState.authenticated(session));
-    } on Object catch (error, stackTrace) {
-      addError(error, stackTrace);
-      emit(AuthState.failure(error.toString()));
-    }
-  }
+  String _failureMessage(AuthFailure failure) => switch (failure) {
+        AuthNetworkFailure(:final message) => message,
+        AuthUnauthorizedFailure(:final message) => message,
+        AuthStorageFailure(:final message) => message,
+        AuthOtherFailure(:final message) => message,
+      };
 }

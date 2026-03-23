@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:thus_auth/thus_auth.dart';
 import 'package:thus_messaging/thus_messaging.dart';
 
-import 'command_handler.dart';
-import 'command_help.dart';
+import 'package:thus_cli/src/commands/command_handler.dart';
+import 'package:thus_cli/src/commands/command_help.dart';
 
 class SendCommand extends CommandHandler {
   SendCommand(this._messageRepository, this._authRepository);
@@ -32,20 +32,26 @@ class SendCommand extends CommandHandler {
       return;
     }
 
-    final AuthSession? session = await _authRepository.loadSession();
+    final sessionResult = await _authRepository.loadSession().run();
+    final session = sessionResult.getOrElse((_) => null);
     if (session == null) {
       stdout.writeln('Login first with /login <username> <password>');
       return;
     }
 
-    final Message persisted = await _messageRepository.send(
-      toUserId: args.first,
-      content: args.sublist(1).join(' '),
-      source: 'thus_cli',
-    );
+    final result = await _messageRepository
+        .send(
+          receiverId: args.first,
+          content: args.sublist(1).join(' '),
+          source: 'thus_cli',
+        )
+        .run();
 
-    stdout.writeln(
-      'sent -> ${persisted.receiverId}: ${persisted.content} [${persisted.status.name}]',
+    result.match(
+      (failure) => stdout.writeln('Send failed: $failure'),
+      (persisted) => stdout.writeln(
+        'sent -> ${persisted.receiverId}: ${persisted.content} [${persisted.status.name}]',
+      ),
     );
   }
 }

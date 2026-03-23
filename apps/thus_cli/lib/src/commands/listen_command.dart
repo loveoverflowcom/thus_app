@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:thus_messaging/thus_messaging.dart';
 
-import 'command_handler.dart';
-import 'command_help.dart';
+import 'package:thus_cli/src/commands/command_handler.dart';
+import 'package:thus_cli/src/commands/command_help.dart';
 
 class ListenCommand extends CommandHandler {
   ListenCommand(this._messageRepository);
@@ -26,10 +26,10 @@ class ListenCommand extends CommandHandler {
       'Listening for incoming SSE messages. Press Ctrl+C to stop.',
     );
 
-    final Stream<Message> stream = _messageRepository.incoming();
-    await for (final Message message in stream) {
+    await for (final event in _messageRepository.incomingMessages) {
+      final received = event as MessageReceived;
       stdout.writeln(
-        '[${message.timestamp.toIso8601String()}] ${message.senderId} -> ${message.receiverId}: ${message.content}',
+        '[incoming] conversationId: ${received.conversationId} | messageId: ${received.messageId}',
       );
     }
   }

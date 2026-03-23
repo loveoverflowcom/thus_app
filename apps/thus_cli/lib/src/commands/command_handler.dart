@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'command_help.dart';
+import 'package:thus_cli/src/commands/command_help.dart';
 
 abstract class CommandHandler {
   CommandHelp get help;

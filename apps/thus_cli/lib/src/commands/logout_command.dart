@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:thus_auth/thus_auth.dart';
 
-import 'command_handler.dart';
-import 'command_help.dart';
+import 'package:thus_cli/src/commands/command_handler.dart';
+import 'package:thus_cli/src/commands/command_help.dart';
 
 class LogoutCommand extends CommandHandler {
   LogoutCommand(this._authRepository);
@@ -22,7 +22,10 @@ class LogoutCommand extends CommandHandler {
 
   @override
   Future<void> handle(List<String> args) async {
-    await _authRepository.logout();
-    stdout.writeln('Local session cleared.');
+    final result = await _authRepository.logout().run();
+    result.match(
+      (failure) => stdout.writeln('Logout failed: $failure'),
+      (_) => stdout.writeln('Local session cleared.'),
+    );
   }
 }

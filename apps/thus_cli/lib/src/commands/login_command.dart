@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:thus_auth/thus_auth.dart';
 
-import 'command_handler.dart';
-import 'command_help.dart';
+import 'package:thus_cli/src/commands/command_handler.dart';
+import 'package:thus_cli/src/commands/command_help.dart';
 
 class LoginCommand extends CommandHandler {
   LoginCommand(this._authRepository);
@@ -27,13 +27,17 @@ class LoginCommand extends CommandHandler {
       return;
     }
 
-    final AuthSession session = await _authRepository.login(
-      AuthCredentials(
-        username: args.first,
-        password: args.sublist(1).join(' '),
-      ),
-    );
+    final result = await _authRepository
+        .login(
+          username: args.first,
+          password: args.sublist(1).join(' '),
+        )
+        .run();
 
-    stdout.writeln('Logged in as ${session.username} (${session.userId})');
+    result.match(
+      (failure) => stdout.writeln('Login failed: $failure'),
+      (session) =>
+          stdout.writeln('Logged in as ${session.username} (${session.userId})'),
+    );
   }
 }

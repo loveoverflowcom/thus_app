@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:http_interceptor/http_interceptor.dart';
 import 'package:thus_core/thus_core.dart';
 
-import 'http_log_interceptor.dart';
+import 'package:thus_network/src/http_log_interceptor.dart';
 
 class RestClient {
   RestClient({

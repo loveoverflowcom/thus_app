@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'commands/command_handler.dart';
-import 'commands/command_help.dart';
+import 'package:thus_cli/src/commands/command_handler.dart';
+import 'package:thus_cli/src/commands/command_help.dart';
 
 class Cli {
   Cli(this._handlers);

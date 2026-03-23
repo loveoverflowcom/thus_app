@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'message.dart';
+import 'package:thus_messaging/src/domain/entities/message.dart';
 
 part 'chat.freezed.dart';
 part 'chat.g.dart';
