@@ -1,3 +1,4 @@
+import 'dart:async' show StreamSubscription;
 import 'dart:convert';
 
 import 'package:thus_auth/thus_auth.dart';
@@ -103,7 +104,12 @@ class MessageRepositoryImpl implements MessageRepository {
           _incomingStream = null;
         }
       }
-    })().asBroadcastStream();
+    })().asBroadcastStream(
+      onCancel: (StreamSubscription<Message> subscription) {
+        // Keep the source stream alive even when listener count drops to 0
+        // so the SSE connection is not torn down between navigations.
+      },
+    );
 
     _incomingStream = stream;
     return stream;

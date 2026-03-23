@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -17,8 +15,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   final MessageRepository _messageRepository;
-
-  StreamSubscription<Message>? _subscription;
 
   Future<void> _onLoadConversation(
     LoadConversation event,
@@ -38,12 +34,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       );
       emit(state.copyWith(status: ChatStatus.ready, messages: history));
 
-      await _subscription?.cancel();
-      final Stream<Message> stream = _messageRepository.subscribe(
-        event.conversationId,
-      );
-      _subscription = stream.listen(
-        (Message message) => add(ChatMessageReceived(message)),
+      await emit.onEach(
+        _messageRepository.subscribe(event.conversationId),
+        onData: (Message message) => add(ChatMessageReceived(message)),
         onError: addError,
       );
     } on Object catch (error, stackTrace) {
@@ -105,8 +98,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   @override
-  Future<void> close() async {
-    await _subscription?.cancel();
+  Future<void> close() {
     return super.close();
   }
 }

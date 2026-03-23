@@ -68,6 +68,8 @@ class SseClient {
     final List<String> dataLines = <String>[];
 
     await for (final String line in lines) {
+      _logger.log('SSE raw line: ${line.isEmpty ? '<empty>' : line}', level: .debug);
+
       if (line.isEmpty) {
         final SseEvent? event = _buildEvent(
           eventName: eventName,
@@ -76,6 +78,7 @@ class SseClient {
         );
 
         if (event != null) {
+          _logger.log('SSE yielding event: ${event.event}', level: .debug);
           yield event;
         }
 
@@ -112,6 +115,8 @@ class SseClient {
           break;
       }
     }
+
+    _logger.log('SSE stream ended for $uri', level: .warning);
 
     final SseEvent? trailingEvent = _buildEvent(
       eventName: eventName,
