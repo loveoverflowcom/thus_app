@@ -44,6 +44,7 @@ class SendCommand extends CommandHandler {
           receiverId: args.first,
           content: args.sublist(1).join(' '),
           source: 'thus_cli',
+          eventType: 'chat.message',
         )
         .run();
 

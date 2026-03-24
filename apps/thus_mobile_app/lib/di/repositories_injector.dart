@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:thus_auth/thus_auth.dart';
+import 'package:thus_contacts/thus_contacts.dart';
 import 'package:thus_core/thus_core.dart';
 import 'package:thus_messaging/thus_messaging.dart';
 import 'package:thus_network/thus_network.dart';
@@ -89,6 +90,13 @@ final class RepositoriesInjector extends HookWidget {
       ),
     );
 
+    final contactRepository = useMemoized<ContactRepository>(
+      () => ContactRepositoryImpl(
+        restClient: restClient,
+        authRepository: authRepository,
+      ),
+    );
+
     useEffect(() {
       return messageRepository.dispose;
     }, [messageRepository]);
@@ -105,6 +113,7 @@ final class RepositoriesInjector extends HookWidget {
       providers: [
         RepositoryProvider<AuthRepository>.value(value: authRepository),
         RepositoryProvider<MessageRepository>.value(value: messageRepository),
+        RepositoryProvider<ContactRepository>.value(value: contactRepository),
       ],
       child: child,
     );

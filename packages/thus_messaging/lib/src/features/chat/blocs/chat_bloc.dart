@@ -105,7 +105,11 @@ final class ChatBloc extends Bloc<ChatEvent, ChatState> {
     Emitter<ChatState> emit,
   ) async {
     final result = await _repository
-        .send(receiverId: event.receiverId, content: event.content)
+        .send(
+          receiverId: event.receiverId,
+          content: event.content,
+          eventType: 'chat.message',
+        )
         .run();
     result.match(
       (failure) => emit(

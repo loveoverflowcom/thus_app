@@ -16,6 +16,7 @@ abstract class MessageRepository {
     required String receiverId,
     required String content,
     String source,
+    String eventType,
   });
 
   TaskEither<MessageFailure, List<Message>> loadHistory(String conversationId);

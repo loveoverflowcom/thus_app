@@ -39,6 +39,13 @@ final class PersonalView extends StatelessWidget {
           Card(
             child: Column(
               children: [
+                ListTile(
+                  leading: const Icon(Icons.badge_outlined),
+                  title: const Text('Edit profile'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => context.push('/profile'),
+                ),
+                const Divider(height: 1),
                 SwitchListTile(
                   title: const Text('Dark mode'),
                   secondary: Icon(

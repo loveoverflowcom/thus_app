@@ -44,6 +44,7 @@ final class MessageRepositoryImpl extends MessageRepository {
     required String receiverId,
     required String content,
     String source = 'thus_mobile',
+    String eventType = 'chat.message',
   }) {
     if (!isUuid(receiverId.trim())) {
       return TaskEither.left(
@@ -69,17 +70,28 @@ final class MessageRepositoryImpl extends MessageRepository {
           conversationId: normalizedId,
           source: source,
           isIncoming: false,
+          eventName: eventType,
         );
 
-        await _cache.write(draft.id, draft);
+        // Only persist chat messages to local cache
+        if (eventType == 'chat.message') {
+          await _cache.write(draft.id, draft);
+        }
+
+        final payload = <String, dynamic>{
+          'to_user_id': normalizedId,
+          'event': eventType,
+          'payload': <String, dynamic>{
+            'body': content,
+            'from_user_id': session.userId,
+            'source': source,
+            'timestamp': draft.timestamp.toIso8601String(),
+          },
+        };
 
         final response = await _restClient.postJson(
           AppConstants.sendMessagePath,
-          data: <String, dynamic>{
-            'to_user_id': normalizedId,
-            'event': draft.eventName,
-            'payload': <String, dynamic>{'body': content, 'source': source},
-          },
+          data: payload,
           headers: _bearerHeaders(session.accessToken),
         );
 
@@ -94,7 +106,9 @@ final class MessageRepositoryImpl extends MessageRepository {
               : MessageStatus.sent,
         );
 
-        await _cache.write(persisted.id, persisted);
+        if (eventType == 'chat.message') {
+          await _cache.write(persisted.id, persisted);
+        }
         return persisted;
       },
       (error, stackTrace) => MessageFailure.network(
@@ -249,9 +263,22 @@ final class MessageRepositoryImpl extends MessageRepository {
 
     final nestedPayload =
         _castJsonMap(payloadMap['payload']) ?? <String, dynamic>{};
+    final eventName =
+        _stringValue(payloadMap['event']) ?? fallbackEventName;
+
+    // Non-chat events (typing, read, contact.*) don't have a body —
+    // synthesize a content string so they can be stored/streamed.
+    final isEphemeralEvent = const {
+      'chat.typing',
+      'chat.read',
+      'contact.request',
+      'contact.accepted',
+    }.contains(eventName);
+
     final content = _stringValue(nestedPayload['body']) ??
         _stringValue(payloadMap['body']) ??
-        _stringValue(payloadMap['message']);
+        _stringValue(payloadMap['message']) ??
+        (isEphemeralEvent ? eventName : null);
 
     if (content == null || content.trim().isEmpty) return null;
 

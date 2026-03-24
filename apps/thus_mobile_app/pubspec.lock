@@ -692,6 +692,13 @@ packages:
       relative: true
     source: path
     version: "1.0.0"
+  thus_contacts:
+    dependency: "direct main"
+    description:
+      path: "../../packages/thus_contacts"
+      relative: true
+    source: path
+    version: "1.0.0"
   thus_core:
     dependency: "direct main"
     description:
@@ -793,5 +800,5 @@ packages:
     source: hosted
     version: "3.1.3"
 sdks:
-  dart: ">=3.10.3 <4.0.0"
+  dart: ">=3.11.0 <4.0.0"
   flutter: ">=3.38.4"

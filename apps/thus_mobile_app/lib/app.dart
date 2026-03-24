@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:thus_auth/thus_auth.dart';
+import 'package:thus_contacts/thus_contacts.dart';
 import 'package:thus_messaging/thus_messaging.dart';
 
 import 'package:thus_mobile_app/di/di.dart';
@@ -40,6 +41,9 @@ final class _AppRouter extends HookWidget {
         RepositoryProvider<AuthRepository>.value(value: authRepository),
         RepositoryProvider<MessageRepository>.value(
           value: context.read<MessageRepository>(),
+        ),
+        RepositoryProvider<ContactRepository>.value(
+          value: context.read<ContactRepository>(),
         ),
       ],
       child: BlocProvider.value(

@@ -12,6 +12,7 @@ List<RouteBase> get $appRoutes => [
       $splashRoute,
       $loginRoute,
       $chatRoute,
+      $profileRoute,
       $mainShellRoute,
     ];
 
@@ -81,6 +82,27 @@ extension _$ChatRouteExtension on ChatRoute {
       GoRouteData.$location('/chat/${Uri.encodeComponent(conversationId)}');
 }
 
+RouteBase get $profileRoute => GoRoute(
+      path: '/profile',
+      name: _$ProfileRouteExtension._name,
+      builder: (context, state) => const ProfileRoute().build(context, state),
+    );
+
+extension _$ProfileRouteExtension on ProfileRoute {
+  static const String _name = 'ProfileRoute';
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+
+  String get location => GoRouteData.$location('/profile');
+}
+
 RouteBase get $mainShellRoute => ShellRoute(
       builder: (context, state, child) =>
           const MainShellRoute().builder(context, state, child),
@@ -90,6 +112,12 @@ RouteBase get $mainShellRoute => ShellRoute(
           name: _$HomeTabRouteExtension._name,
           builder: (context, state) =>
               const HomeTabRoute().build(context, state),
+        ),
+        GoRoute(
+          path: '/contacts',
+          name: _$ContactsTabRouteExtension._name,
+          builder: (context, state) =>
+              const ContactsTabRoute().build(context, state),
         ),
         GoRoute(
           path: '/personal',
@@ -113,6 +141,21 @@ extension _$HomeTabRouteExtension on HomeTabRoute {
   void replace(BuildContext context) => context.replace(location);
 
   String get location => GoRouteData.$location('/');
+}
+
+extension _$ContactsTabRouteExtension on ContactsTabRoute {
+  static const String _name = 'ContactsTabRoute';
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+
+  String get location => GoRouteData.$location('/contacts');
 }
 
 extension _$PersonalTabRouteExtension on PersonalTabRoute {

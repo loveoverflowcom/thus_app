@@ -8,6 +8,7 @@ final class MainShell extends StatelessWidget {
 
   static const _tabs = [
     (label: 'Home', icon: Icons.chat_bubble_outline, path: '/'),
+    (label: 'Contacts', icon: Icons.people_outline, path: '/contacts'),
     (label: 'Personal', icon: Icons.person_outline, path: '/personal'),
   ];
 

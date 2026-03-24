@@ -7,7 +7,9 @@ import 'package:thus_messaging/thus_messaging.dart';
 import 'package:thus_mobile_app/features/auth/views.dart';
 import 'package:thus_mobile_app/features/chat/views.dart';
 import 'package:thus_mobile_app/features/chat_list/views.dart';
+import 'package:thus_mobile_app/features/contacts/views.dart';
 import 'package:thus_mobile_app/features/personal/views.dart';
+import 'package:thus_mobile_app/features/profile/views.dart';
 import 'package:thus_mobile_app/features/splash/views.dart';
 import 'package:thus_mobile_app/widgets/main_shell.dart';
 
@@ -60,6 +62,7 @@ final class ChatRoute extends GoRouteData {
 @TypedShellRoute<MainShellRoute>(
   routes: [
     TypedGoRoute<HomeTabRoute>(path: '/'),
+    TypedGoRoute<ContactsTabRoute>(path: '/contacts'),
     TypedGoRoute<PersonalTabRoute>(path: '/personal'),
   ],
 )
@@ -84,10 +87,27 @@ final class HomeTabRoute extends GoRouteData {
       );
 }
 
+final class ContactsTabRoute extends GoRouteData {
+  const ContactsTabRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const ContactsView();
+}
+
 final class PersonalTabRoute extends GoRouteData {
   const PersonalTabRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const PersonalView();
+}
+
+@TypedGoRoute<ProfileRoute>(path: '/profile')
+final class ProfileRoute extends GoRouteData {
+  const ProfileRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const ProfileView();
 }
