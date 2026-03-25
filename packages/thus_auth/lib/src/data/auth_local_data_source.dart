@@ -2,7 +2,7 @@ import 'package:thus_storage/thus_storage.dart';
 
 import 'package:thus_auth/src/data/models/auth_session.dart';
 
-class AuthLocalDataSource {
+final class AuthLocalDataSource {
   AuthLocalDataSource(this._cacheRepository);
 
   static const String sessionKey = 'active_session';

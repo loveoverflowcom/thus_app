@@ -10,6 +10,8 @@ void main() {
         accessToken: 'access',
         refreshToken: 'refresh',
         notificationToken: 'notify',
+        tokenType: '',
+        expiresIn: 0,
         authenticatedAt: DateTime.utc(2026, 3, 19),
       );
 

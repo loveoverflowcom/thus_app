@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,817 +9,624 @@ part of 'auth_bloc.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
 /// @nodoc
 mixin _$AuthEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(String username, String password) loginSubmitted,
-    required TResult Function(String username, String password)
-    registerSubmitted,
-    required TResult Function() refreshRequested,
-    required TResult Function() logoutRequested,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(String username, String password)? loginSubmitted,
-    TResult? Function(String username, String password)? registerSubmitted,
-    TResult? Function()? refreshRequested,
-    TResult? Function()? logoutRequested,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(String username, String password)? loginSubmitted,
-    TResult Function(String username, String password)? registerSubmitted,
-    TResult Function()? refreshRequested,
-    TResult Function()? logoutRequested,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_LoginSubmitted value) loginSubmitted,
-    required TResult Function(_RegisterSubmitted value) registerSubmitted,
-    required TResult Function(_RefreshRequested value) refreshRequested,
-    required TResult Function(_LogoutRequested value) logoutRequested,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_LoginSubmitted value)? loginSubmitted,
-    TResult? Function(_RegisterSubmitted value)? registerSubmitted,
-    TResult? Function(_RefreshRequested value)? refreshRequested,
-    TResult? Function(_LogoutRequested value)? logoutRequested,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_LoginSubmitted value)? loginSubmitted,
-    TResult Function(_RegisterSubmitted value)? registerSubmitted,
-    TResult Function(_RefreshRequested value)? refreshRequested,
-    TResult Function(_LogoutRequested value)? logoutRequested,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AuthEvent()';
+}
+
+
+}
+
+
+
+
+/// Adds pattern-matching-related methods to [AuthEvent].
+extension AuthEventPatterns on AuthEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Started value)?  started,TResult Function( _LoginSubmitted value)?  loginSubmitted,TResult Function( _RegisterSubmitted value)?  registerSubmitted,TResult Function( _RefreshRequested value)?  refreshRequested,TResult Function( _LogoutRequested value)?  logoutRequested,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Started() when started != null:
+return started(_that);case _LoginSubmitted() when loginSubmitted != null:
+return loginSubmitted(_that);case _RegisterSubmitted() when registerSubmitted != null:
+return registerSubmitted(_that);case _RefreshRequested() when refreshRequested != null:
+return refreshRequested(_that);case _LogoutRequested() when logoutRequested != null:
+return logoutRequested(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Started value)  started,required TResult Function( _LoginSubmitted value)  loginSubmitted,required TResult Function( _RegisterSubmitted value)  registerSubmitted,required TResult Function( _RefreshRequested value)  refreshRequested,required TResult Function( _LogoutRequested value)  logoutRequested,}){
+final _that = this;
+switch (_that) {
+case _Started():
+return started(_that);case _LoginSubmitted():
+return loginSubmitted(_that);case _RegisterSubmitted():
+return registerSubmitted(_that);case _RefreshRequested():
+return refreshRequested(_that);case _LogoutRequested():
+return logoutRequested(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Started value)?  started,TResult? Function( _LoginSubmitted value)?  loginSubmitted,TResult? Function( _RegisterSubmitted value)?  registerSubmitted,TResult? Function( _RefreshRequested value)?  refreshRequested,TResult? Function( _LogoutRequested value)?  logoutRequested,}){
+final _that = this;
+switch (_that) {
+case _Started() when started != null:
+return started(_that);case _LoginSubmitted() when loginSubmitted != null:
+return loginSubmitted(_that);case _RegisterSubmitted() when registerSubmitted != null:
+return registerSubmitted(_that);case _RefreshRequested() when refreshRequested != null:
+return refreshRequested(_that);case _LogoutRequested() when logoutRequested != null:
+return logoutRequested(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( String username,  String password)?  loginSubmitted,TResult Function( String username,  String password)?  registerSubmitted,TResult Function()?  refreshRequested,TResult Function()?  logoutRequested,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Started() when started != null:
+return started();case _LoginSubmitted() when loginSubmitted != null:
+return loginSubmitted(_that.username,_that.password);case _RegisterSubmitted() when registerSubmitted != null:
+return registerSubmitted(_that.username,_that.password);case _RefreshRequested() when refreshRequested != null:
+return refreshRequested();case _LogoutRequested() when logoutRequested != null:
+return logoutRequested();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( String username,  String password)  loginSubmitted,required TResult Function( String username,  String password)  registerSubmitted,required TResult Function()  refreshRequested,required TResult Function()  logoutRequested,}) {final _that = this;
+switch (_that) {
+case _Started():
+return started();case _LoginSubmitted():
+return loginSubmitted(_that.username,_that.password);case _RegisterSubmitted():
+return registerSubmitted(_that.username,_that.password);case _RefreshRequested():
+return refreshRequested();case _LogoutRequested():
+return logoutRequested();}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( String username,  String password)?  loginSubmitted,TResult? Function( String username,  String password)?  registerSubmitted,TResult? Function()?  refreshRequested,TResult? Function()?  logoutRequested,}) {final _that = this;
+switch (_that) {
+case _Started() when started != null:
+return started();case _LoginSubmitted() when loginSubmitted != null:
+return loginSubmitted(_that.username,_that.password);case _RegisterSubmitted() when registerSubmitted != null:
+return registerSubmitted(_that.username,_that.password);case _RefreshRequested() when refreshRequested != null:
+return refreshRequested();case _LogoutRequested() when logoutRequested != null:
+return logoutRequested();case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 
-class _$StartedImpl implements _Started {
-  const _$StartedImpl();
 
-  @override
-  String toString() {
-    return 'AuthEvent.started()';
-  }
+class _Started implements AuthEvent {
+  const _Started();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$StartedImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(String username, String password) loginSubmitted,
-    required TResult Function(String username, String password)
-    registerSubmitted,
-    required TResult Function() refreshRequested,
-    required TResult Function() logoutRequested,
-  }) {
-    return started();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(String username, String password)? loginSubmitted,
-    TResult? Function(String username, String password)? registerSubmitted,
-    TResult? Function()? refreshRequested,
-    TResult? Function()? logoutRequested,
-  }) {
-    return started?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(String username, String password)? loginSubmitted,
-    TResult Function(String username, String password)? registerSubmitted,
-    TResult Function()? refreshRequested,
-    TResult Function()? logoutRequested,
-    required TResult orElse(),
-  }) {
-    if (started != null) {
-      return started();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_LoginSubmitted value) loginSubmitted,
-    required TResult Function(_RegisterSubmitted value) registerSubmitted,
-    required TResult Function(_RefreshRequested value) refreshRequested,
-    required TResult Function(_LogoutRequested value) logoutRequested,
-  }) {
-    return started(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_LoginSubmitted value)? loginSubmitted,
-    TResult? Function(_RegisterSubmitted value)? registerSubmitted,
-    TResult? Function(_RefreshRequested value)? refreshRequested,
-    TResult? Function(_LogoutRequested value)? logoutRequested,
-  }) {
-    return started?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_LoginSubmitted value)? loginSubmitted,
-    TResult Function(_RegisterSubmitted value)? registerSubmitted,
-    TResult Function(_RefreshRequested value)? refreshRequested,
-    TResult Function(_LogoutRequested value)? logoutRequested,
-    required TResult orElse(),
-  }) {
-    if (started != null) {
-      return started(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Started);
 }
 
-abstract class _Started implements AuthEvent {
-  const factory _Started() = _$StartedImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AuthEvent.started()';
 }
+
+
+}
+
+
+
 
 /// @nodoc
 
-class _$LoginSubmittedImpl implements _LoginSubmitted {
-  const _$LoginSubmittedImpl({required this.username, required this.password});
 
-  @override
-  final String username;
-  @override
-  final String password;
+class _LoginSubmitted implements AuthEvent {
+  const _LoginSubmitted({required this.username, required this.password});
+  
 
-  @override
-  String toString() {
-    return 'AuthEvent.loginSubmitted(username: $username, password: $password)';
-  }
+ final  String username;
+ final  String password;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoginSubmittedImpl &&
-            (identical(other.username, username) ||
-                other.username == username) &&
-            (identical(other.password, password) ||
-                other.password == password));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, username, password);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(String username, String password) loginSubmitted,
-    required TResult Function(String username, String password)
-    registerSubmitted,
-    required TResult Function() refreshRequested,
-    required TResult Function() logoutRequested,
-  }) {
-    return loginSubmitted(username, password);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(String username, String password)? loginSubmitted,
-    TResult? Function(String username, String password)? registerSubmitted,
-    TResult? Function()? refreshRequested,
-    TResult? Function()? logoutRequested,
-  }) {
-    return loginSubmitted?.call(username, password);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(String username, String password)? loginSubmitted,
-    TResult Function(String username, String password)? registerSubmitted,
-    TResult Function()? refreshRequested,
-    TResult Function()? logoutRequested,
-    required TResult orElse(),
-  }) {
-    if (loginSubmitted != null) {
-      return loginSubmitted(username, password);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_LoginSubmitted value) loginSubmitted,
-    required TResult Function(_RegisterSubmitted value) registerSubmitted,
-    required TResult Function(_RefreshRequested value) refreshRequested,
-    required TResult Function(_LogoutRequested value) logoutRequested,
-  }) {
-    return loginSubmitted(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_LoginSubmitted value)? loginSubmitted,
-    TResult? Function(_RegisterSubmitted value)? registerSubmitted,
-    TResult? Function(_RefreshRequested value)? refreshRequested,
-    TResult? Function(_LogoutRequested value)? logoutRequested,
-  }) {
-    return loginSubmitted?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_LoginSubmitted value)? loginSubmitted,
-    TResult Function(_RegisterSubmitted value)? registerSubmitted,
-    TResult Function(_RefreshRequested value)? refreshRequested,
-    TResult Function(_LogoutRequested value)? logoutRequested,
-    required TResult orElse(),
-  }) {
-    if (loginSubmitted != null) {
-      return loginSubmitted(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginSubmitted&&(identical(other.username, username) || other.username == username)&&(identical(other.password, password) || other.password == password));
 }
 
-abstract class _LoginSubmitted implements AuthEvent {
-  const factory _LoginSubmitted({
-    required final String username,
-    required final String password,
-  }) = _$LoginSubmittedImpl;
 
-  String get username;
-  String get password;
+@override
+int get hashCode => Object.hash(runtimeType,username,password);
+
+@override
+String toString() {
+  return 'AuthEvent.loginSubmitted(username: $username, password: $password)';
 }
+
+
+}
+
+
+
 
 /// @nodoc
 
-class _$RegisterSubmittedImpl implements _RegisterSubmitted {
-  const _$RegisterSubmittedImpl({
-    required this.username,
-    required this.password,
-  });
 
-  @override
-  final String username;
-  @override
-  final String password;
+class _RegisterSubmitted implements AuthEvent {
+  const _RegisterSubmitted({required this.username, required this.password});
+  
 
-  @override
-  String toString() {
-    return 'AuthEvent.registerSubmitted(username: $username, password: $password)';
-  }
+ final  String username;
+ final  String password;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$RegisterSubmittedImpl &&
-            (identical(other.username, username) ||
-                other.username == username) &&
-            (identical(other.password, password) ||
-                other.password == password));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, username, password);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(String username, String password) loginSubmitted,
-    required TResult Function(String username, String password)
-    registerSubmitted,
-    required TResult Function() refreshRequested,
-    required TResult Function() logoutRequested,
-  }) {
-    return registerSubmitted(username, password);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(String username, String password)? loginSubmitted,
-    TResult? Function(String username, String password)? registerSubmitted,
-    TResult? Function()? refreshRequested,
-    TResult? Function()? logoutRequested,
-  }) {
-    return registerSubmitted?.call(username, password);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(String username, String password)? loginSubmitted,
-    TResult Function(String username, String password)? registerSubmitted,
-    TResult Function()? refreshRequested,
-    TResult Function()? logoutRequested,
-    required TResult orElse(),
-  }) {
-    if (registerSubmitted != null) {
-      return registerSubmitted(username, password);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_LoginSubmitted value) loginSubmitted,
-    required TResult Function(_RegisterSubmitted value) registerSubmitted,
-    required TResult Function(_RefreshRequested value) refreshRequested,
-    required TResult Function(_LogoutRequested value) logoutRequested,
-  }) {
-    return registerSubmitted(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_LoginSubmitted value)? loginSubmitted,
-    TResult? Function(_RegisterSubmitted value)? registerSubmitted,
-    TResult? Function(_RefreshRequested value)? refreshRequested,
-    TResult? Function(_LogoutRequested value)? logoutRequested,
-  }) {
-    return registerSubmitted?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_LoginSubmitted value)? loginSubmitted,
-    TResult Function(_RegisterSubmitted value)? registerSubmitted,
-    TResult Function(_RefreshRequested value)? refreshRequested,
-    TResult Function(_LogoutRequested value)? logoutRequested,
-    required TResult orElse(),
-  }) {
-    if (registerSubmitted != null) {
-      return registerSubmitted(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RegisterSubmitted&&(identical(other.username, username) || other.username == username)&&(identical(other.password, password) || other.password == password));
 }
 
-abstract class _RegisterSubmitted implements AuthEvent {
-  const factory _RegisterSubmitted({
-    required final String username,
-    required final String password,
-  }) = _$RegisterSubmittedImpl;
 
-  String get username;
-  String get password;
+@override
+int get hashCode => Object.hash(runtimeType,username,password);
+
+@override
+String toString() {
+  return 'AuthEvent.registerSubmitted(username: $username, password: $password)';
 }
+
+
+}
+
+
+
 
 /// @nodoc
 
-class _$RefreshRequestedImpl implements _RefreshRequested {
-  const _$RefreshRequestedImpl();
 
-  @override
-  String toString() {
-    return 'AuthEvent.refreshRequested()';
-  }
+class _RefreshRequested implements AuthEvent {
+  const _RefreshRequested();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RefreshRequestedImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(String username, String password) loginSubmitted,
-    required TResult Function(String username, String password)
-    registerSubmitted,
-    required TResult Function() refreshRequested,
-    required TResult Function() logoutRequested,
-  }) {
-    return refreshRequested();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(String username, String password)? loginSubmitted,
-    TResult? Function(String username, String password)? registerSubmitted,
-    TResult? Function()? refreshRequested,
-    TResult? Function()? logoutRequested,
-  }) {
-    return refreshRequested?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(String username, String password)? loginSubmitted,
-    TResult Function(String username, String password)? registerSubmitted,
-    TResult Function()? refreshRequested,
-    TResult Function()? logoutRequested,
-    required TResult orElse(),
-  }) {
-    if (refreshRequested != null) {
-      return refreshRequested();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_LoginSubmitted value) loginSubmitted,
-    required TResult Function(_RegisterSubmitted value) registerSubmitted,
-    required TResult Function(_RefreshRequested value) refreshRequested,
-    required TResult Function(_LogoutRequested value) logoutRequested,
-  }) {
-    return refreshRequested(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_LoginSubmitted value)? loginSubmitted,
-    TResult? Function(_RegisterSubmitted value)? registerSubmitted,
-    TResult? Function(_RefreshRequested value)? refreshRequested,
-    TResult? Function(_LogoutRequested value)? logoutRequested,
-  }) {
-    return refreshRequested?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_LoginSubmitted value)? loginSubmitted,
-    TResult Function(_RegisterSubmitted value)? registerSubmitted,
-    TResult Function(_RefreshRequested value)? refreshRequested,
-    TResult Function(_LogoutRequested value)? logoutRequested,
-    required TResult orElse(),
-  }) {
-    if (refreshRequested != null) {
-      return refreshRequested(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RefreshRequested);
 }
 
-abstract class _RefreshRequested implements AuthEvent {
-  const factory _RefreshRequested() = _$RefreshRequestedImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AuthEvent.refreshRequested()';
 }
+
+
+}
+
+
+
 
 /// @nodoc
 
-class _$LogoutRequestedImpl implements _LogoutRequested {
-  const _$LogoutRequestedImpl();
 
-  @override
-  String toString() {
-    return 'AuthEvent.logoutRequested()';
-  }
+class _LogoutRequested implements AuthEvent {
+  const _LogoutRequested();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LogoutRequestedImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(String username, String password) loginSubmitted,
-    required TResult Function(String username, String password)
-    registerSubmitted,
-    required TResult Function() refreshRequested,
-    required TResult Function() logoutRequested,
-  }) {
-    return logoutRequested();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(String username, String password)? loginSubmitted,
-    TResult? Function(String username, String password)? registerSubmitted,
-    TResult? Function()? refreshRequested,
-    TResult? Function()? logoutRequested,
-  }) {
-    return logoutRequested?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(String username, String password)? loginSubmitted,
-    TResult Function(String username, String password)? registerSubmitted,
-    TResult Function()? refreshRequested,
-    TResult Function()? logoutRequested,
-    required TResult orElse(),
-  }) {
-    if (logoutRequested != null) {
-      return logoutRequested();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_LoginSubmitted value) loginSubmitted,
-    required TResult Function(_RegisterSubmitted value) registerSubmitted,
-    required TResult Function(_RefreshRequested value) refreshRequested,
-    required TResult Function(_LogoutRequested value) logoutRequested,
-  }) {
-    return logoutRequested(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_LoginSubmitted value)? loginSubmitted,
-    TResult? Function(_RegisterSubmitted value)? registerSubmitted,
-    TResult? Function(_RefreshRequested value)? refreshRequested,
-    TResult? Function(_LogoutRequested value)? logoutRequested,
-  }) {
-    return logoutRequested?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_LoginSubmitted value)? loginSubmitted,
-    TResult Function(_RegisterSubmitted value)? registerSubmitted,
-    TResult Function(_RefreshRequested value)? refreshRequested,
-    TResult Function(_LogoutRequested value)? logoutRequested,
-    required TResult orElse(),
-  }) {
-    if (logoutRequested != null) {
-      return logoutRequested(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LogoutRequested);
 }
 
-abstract class _LogoutRequested implements AuthEvent {
-  const factory _LogoutRequested() = _$LogoutRequestedImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AuthEvent.logoutRequested()';
 }
+
+
+}
+
+
+
 
 /// @nodoc
 mixin _$AuthState {
-  AuthStatus get status => throw _privateConstructorUsedError;
-  AuthSession? get session => throw _privateConstructorUsedError;
-  String? get message => throw _privateConstructorUsedError;
 
-  /// Create a copy of AuthState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $AuthStateCopyWith<AuthState> get copyWith =>
-      throw _privateConstructorUsedError;
+ AuthStatus get status; AuthSession? get session; String? get message;
+/// Create a copy of AuthState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AuthStateCopyWith<AuthState> get copyWith => _$AuthStateCopyWithImpl<AuthState>(this as AuthState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthState&&(identical(other.status, status) || other.status == status)&&(identical(other.session, session) || other.session == session)&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,status,session,message);
+
+@override
+String toString() {
+  return 'AuthState(status: $status, session: $session, message: $message)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $AuthStateCopyWith<$Res> {
-  factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
-      _$AuthStateCopyWithImpl<$Res, AuthState>;
-  @useResult
-  $Res call({AuthStatus status, AuthSession? session, String? message});
+abstract mixin class $AuthStateCopyWith<$Res>  {
+  factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) _then) = _$AuthStateCopyWithImpl;
+@useResult
+$Res call({
+ AuthStatus status, AuthSession? session, String? message
+});
 
-  $AuthSessionCopyWith<$Res>? get session;
+
+$AuthSessionCopyWith<$Res>? get session;
+
 }
-
 /// @nodoc
-class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
+class _$AuthStateCopyWithImpl<$Res>
     implements $AuthStateCopyWith<$Res> {
-  _$AuthStateCopyWithImpl(this._value, this._then);
+  _$AuthStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final AuthState _self;
+  final $Res Function(AuthState) _then;
 
-  /// Create a copy of AuthState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? status = null,
-    Object? session = freezed,
-    Object? message = freezed,
-  }) {
-    return _then(
-      _value.copyWith(
-            status: null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                      as AuthStatus,
-            session: freezed == session
-                ? _value.session
-                : session // ignore: cast_nullable_to_non_nullable
-                      as AuthSession?,
-            message: freezed == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                      as String?,
-          )
-          as $Val,
-    );
+/// Create a copy of AuthState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? session = freezed,Object? message = freezed,}) {
+  return _then(_self.copyWith(
+status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as AuthStatus,session: freezed == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
+as AuthSession?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+/// Create a copy of AuthState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AuthSessionCopyWith<$Res>? get session {
+    if (_self.session == null) {
+    return null;
   }
 
-  /// Create a copy of AuthState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $AuthSessionCopyWith<$Res>? get session {
-    if (_value.session == null) {
-      return null;
-    }
-
-    return $AuthSessionCopyWith<$Res>(_value.session!, (value) {
-      return _then(_value.copyWith(session: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$AuthStateImplCopyWith<$Res>
-    implements $AuthStateCopyWith<$Res> {
-  factory _$$AuthStateImplCopyWith(
-    _$AuthStateImpl value,
-    $Res Function(_$AuthStateImpl) then,
-  ) = __$$AuthStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({AuthStatus status, AuthSession? session, String? message});
-
-  @override
-  $AuthSessionCopyWith<$Res>? get session;
-}
-
-/// @nodoc
-class __$$AuthStateImplCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateImpl>
-    implements _$$AuthStateImplCopyWith<$Res> {
-  __$$AuthStateImplCopyWithImpl(
-    _$AuthStateImpl _value,
-    $Res Function(_$AuthStateImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of AuthState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? status = null,
-    Object? session = freezed,
-    Object? message = freezed,
-  }) {
-    return _then(
-      _$AuthStateImpl(
-        status: null == status
-            ? _value.status
-            : status // ignore: cast_nullable_to_non_nullable
-                  as AuthStatus,
-        session: freezed == session
-            ? _value.session
-            : session // ignore: cast_nullable_to_non_nullable
-                  as AuthSession?,
-        message: freezed == message
-            ? _value.message
-            : message // ignore: cast_nullable_to_non_nullable
-                  as String?,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-
-class _$AuthStateImpl implements _AuthState {
-  const _$AuthStateImpl({
-    this.status = AuthStatus.initial,
-    this.session,
-    this.message,
+  return $AuthSessionCopyWith<$Res>(_self.session!, (value) {
+    return _then(_self.copyWith(session: value));
   });
-
-  @override
-  @JsonKey()
-  final AuthStatus status;
-  @override
-  final AuthSession? session;
-  @override
-  final String? message;
-
-  @override
-  String toString() {
-    return 'AuthState(status: $status, session: $session, message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthStateImpl &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.session, session) || other.session == session) &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, status, session, message);
-
-  /// Create a copy of AuthState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AuthStateImplCopyWith<_$AuthStateImpl> get copyWith =>
-      __$$AuthStateImplCopyWithImpl<_$AuthStateImpl>(this, _$identity);
+}
 }
 
-abstract class _AuthState implements AuthState {
-  const factory _AuthState({
-    final AuthStatus status,
-    final AuthSession? session,
-    final String? message,
-  }) = _$AuthStateImpl;
 
-  @override
-  AuthStatus get status;
-  @override
-  AuthSession? get session;
-  @override
-  String? get message;
+/// Adds pattern-matching-related methods to [AuthState].
+extension AuthStatePatterns on AuthState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  /// Create a copy of AuthState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AuthStateImplCopyWith<_$AuthStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _AuthState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _AuthState() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
 }
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _AuthState value)  $default,){
+final _that = this;
+switch (_that) {
+case _AuthState():
+return $default(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _AuthState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _AuthState() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AuthStatus status,  AuthSession? session,  String? message)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _AuthState() when $default != null:
+return $default(_that.status,_that.session,_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AuthStatus status,  AuthSession? session,  String? message)  $default,) {final _that = this;
+switch (_that) {
+case _AuthState():
+return $default(_that.status,_that.session,_that.message);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AuthStatus status,  AuthSession? session,  String? message)?  $default,) {final _that = this;
+switch (_that) {
+case _AuthState() when $default != null:
+return $default(_that.status,_that.session,_that.message);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _AuthState implements AuthState {
+  const _AuthState({this.status = AuthStatus.initial, this.session, this.message});
+  
+
+@override@JsonKey() final  AuthStatus status;
+@override final  AuthSession? session;
+@override final  String? message;
+
+/// Create a copy of AuthState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AuthStateCopyWith<_AuthState> get copyWith => __$AuthStateCopyWithImpl<_AuthState>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthState&&(identical(other.status, status) || other.status == status)&&(identical(other.session, session) || other.session == session)&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,status,session,message);
+
+@override
+String toString() {
+  return 'AuthState(status: $status, session: $session, message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
+  factory _$AuthStateCopyWith(_AuthState value, $Res Function(_AuthState) _then) = __$AuthStateCopyWithImpl;
+@override @useResult
+$Res call({
+ AuthStatus status, AuthSession? session, String? message
+});
+
+
+@override $AuthSessionCopyWith<$Res>? get session;
+
+}
+/// @nodoc
+class __$AuthStateCopyWithImpl<$Res>
+    implements _$AuthStateCopyWith<$Res> {
+  __$AuthStateCopyWithImpl(this._self, this._then);
+
+  final _AuthState _self;
+  final $Res Function(_AuthState) _then;
+
+/// Create a copy of AuthState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? session = freezed,Object? message = freezed,}) {
+  return _then(_AuthState(
+status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as AuthStatus,session: freezed == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
+as AuthSession?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+/// Create a copy of AuthState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AuthSessionCopyWith<$Res>? get session {
+    if (_self.session == null) {
+    return null;
+  }
+
+  return $AuthSessionCopyWith<$Res>(_self.session!, (value) {
+    return _then(_self.copyWith(session: value));
+  });
+}
+}
+
+// dart format on
