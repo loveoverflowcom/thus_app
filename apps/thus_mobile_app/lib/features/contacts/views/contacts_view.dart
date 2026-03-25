@@ -104,7 +104,6 @@ final class _ContactsList extends StatelessWidget {
         return ListTile(
           leading: CircleAvatar(child: Text(name[0].toUpperCase())),
           title: Text(name),
-          subtitle: Text(c.contactId),
           trailing: IconButton(
             icon: const Icon(Icons.person_remove_outlined),
             tooltip: 'Remove contact',
@@ -131,6 +130,17 @@ final class _RequestsList extends StatelessWidget {
   final List<ContactRequest> outgoing;
   final String userId;
 
+  String _formatDate(DateTime dt) {
+    final local = dt.toLocal();
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final date = DateTime(local.year, local.month, local.day);
+    final hh = local.hour.toString().padLeft(2, '0');
+    final mm = local.minute.toString().padLeft(2, '0');
+    if (date == today) return 'Hôm nay $hh:$mm';
+    return '${local.day}/${local.month}/${local.year}';
+  }
+
   @override
   Widget build(BuildContext context) {
     if (incoming.isEmpty && outgoing.isEmpty) {
@@ -148,8 +158,11 @@ final class _RequestsList extends StatelessWidget {
           ),
           ...incoming.map(
             (r) => ListTile(
-              title: Text(r.fromUser),
-              subtitle: Text('Sent ${r.createdAt.toLocal()}'),
+              leading: CircleAvatar(
+                child: Text(r.fromUser.substring(0, 1).toUpperCase()),
+              ),
+              title: Text('Người dùng #${r.fromUser.substring(0, 8)}'),
+              subtitle: Text(_formatDate(r.createdAt)),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -187,8 +200,11 @@ final class _RequestsList extends StatelessWidget {
           ),
           ...outgoing.map(
             (r) => ListTile(
-              title: Text(r.toUser),
-              subtitle: Text('Pending since ${r.createdAt.toLocal()}'),
+              leading: CircleAvatar(
+                child: Text(r.toUser.substring(0, 1).toUpperCase()),
+              ),
+              title: Text('Người dùng #${r.toUser.substring(0, 8)}'),
+              subtitle: Text('Đang chờ • ${_formatDate(r.createdAt)}'),
               trailing: IconButton(
                 icon: const Icon(Icons.cancel_outlined),
                 tooltip: 'Cancel',

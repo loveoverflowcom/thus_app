@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:thus_auth/thus_auth.dart';
 import 'package:thus_contacts/thus_contacts.dart';
 import 'package:thus_messaging/thus_messaging.dart';
 
 import 'package:thus_mobile_app/di/di.dart';
 import 'package:thus_mobile_app/routing/routes.dart';
+import 'package:thus_mobile_app/theme/app_theme.dart';
 import 'package:thus_mobile_app/theme/theme_cubit.dart';
 
 final class ThusApp extends StatelessWidget {
@@ -31,6 +33,7 @@ final class _AppRouter extends HookWidget {
     useEffect(() {
       authBloc.add(const AuthEvent.started());
       context.read<MessageRepository>().startListening().run();
+      FlutterNativeSplash.remove();
       return authBloc.close;
     }, []);
 
@@ -50,9 +53,9 @@ final class _AppRouter extends HookWidget {
         value: authBloc,
         child: BlocBuilder<ThemeCubit, ThemeMode>(
           builder: (context, mode) => MaterialApp.router(
-            title: 'Thus Chat',
-            theme: ThemeData.light(useMaterial3: true),
-            darkTheme: ThemeData.dark(useMaterial3: true),
+            title: 'Thus',
+            theme: AppTheme.light,
+            darkTheme: AppTheme.dark,
             themeMode: mode,
             routerConfig: router,
           ),

@@ -16,6 +16,8 @@ dependencies:
   json_annotation: ^4.9.0
   thus_auth:
     path: ../thus_auth
+  thus_contacts:
+    path: ../thus_contacts
   thus_core:
     path: ../thus_core
   thus_network:

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,430 +9,271 @@ part of 'message_failure.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
 /// @nodoc
 mixin _$MessageFailure {
-  int? get code => throw _privateConstructorUsedError;
-  String get message => throw _privateConstructorUsedError;
-  StackTrace get stackTrace => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int? code, String message, StackTrace stackTrace)
-    network,
-    required TResult Function(int? code, String message, StackTrace stackTrace)
-    storage,
-    required TResult Function(int? code, String message, StackTrace stackTrace)
-    other,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? code, String message, StackTrace stackTrace)?
-    network,
-    TResult? Function(int? code, String message, StackTrace stackTrace)?
-    storage,
-    TResult? Function(int? code, String message, StackTrace stackTrace)? other,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? code, String message, StackTrace stackTrace)? network,
-    TResult Function(int? code, String message, StackTrace stackTrace)? storage,
-    TResult Function(int? code, String message, StackTrace stackTrace)? other,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(MessageNetworkFailure value) network,
-    required TResult Function(MessageStorageFailure value) storage,
-    required TResult Function(MessageOtherFailure value) other,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MessageNetworkFailure value)? network,
-    TResult? Function(MessageStorageFailure value)? storage,
-    TResult? Function(MessageOtherFailure value)? other,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(MessageNetworkFailure value)? network,
-    TResult Function(MessageStorageFailure value)? storage,
-    TResult Function(MessageOtherFailure value)? other,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+
+ int? get code; String get message; StackTrace get stackTrace;
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MessageFailure&&(identical(other.code, code) || other.code == code)&&(identical(other.message, message) || other.message == message)&&(identical(other.stackTrace, stackTrace) || other.stackTrace == stackTrace));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,code,message,stackTrace);
+
+@override
+String toString() {
+  return 'MessageFailure(code: $code, message: $message, stackTrace: $stackTrace)';
+}
+
+
+}
+
+
+
+
+/// Adds pattern-matching-related methods to [MessageFailure].
+extension MessageFailurePatterns on MessageFailure {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( MessageNetworkFailure value)?  network,TResult Function( MessageStorageFailure value)?  storage,TResult Function( MessageOtherFailure value)?  other,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case MessageNetworkFailure() when network != null:
+return network(_that);case MessageStorageFailure() when storage != null:
+return storage(_that);case MessageOtherFailure() when other != null:
+return other(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( MessageNetworkFailure value)  network,required TResult Function( MessageStorageFailure value)  storage,required TResult Function( MessageOtherFailure value)  other,}){
+final _that = this;
+switch (_that) {
+case MessageNetworkFailure():
+return network(_that);case MessageStorageFailure():
+return storage(_that);case MessageOtherFailure():
+return other(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( MessageNetworkFailure value)?  network,TResult? Function( MessageStorageFailure value)?  storage,TResult? Function( MessageOtherFailure value)?  other,}){
+final _that = this;
+switch (_that) {
+case MessageNetworkFailure() when network != null:
+return network(_that);case MessageStorageFailure() when storage != null:
+return storage(_that);case MessageOtherFailure() when other != null:
+return other(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? code,  String message,  StackTrace stackTrace)?  network,TResult Function( int? code,  String message,  StackTrace stackTrace)?  storage,TResult Function( int? code,  String message,  StackTrace stackTrace)?  other,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case MessageNetworkFailure() when network != null:
+return network(_that.code,_that.message,_that.stackTrace);case MessageStorageFailure() when storage != null:
+return storage(_that.code,_that.message,_that.stackTrace);case MessageOtherFailure() when other != null:
+return other(_that.code,_that.message,_that.stackTrace);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? code,  String message,  StackTrace stackTrace)  network,required TResult Function( int? code,  String message,  StackTrace stackTrace)  storage,required TResult Function( int? code,  String message,  StackTrace stackTrace)  other,}) {final _that = this;
+switch (_that) {
+case MessageNetworkFailure():
+return network(_that.code,_that.message,_that.stackTrace);case MessageStorageFailure():
+return storage(_that.code,_that.message,_that.stackTrace);case MessageOtherFailure():
+return other(_that.code,_that.message,_that.stackTrace);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? code,  String message,  StackTrace stackTrace)?  network,TResult? Function( int? code,  String message,  StackTrace stackTrace)?  storage,TResult? Function( int? code,  String message,  StackTrace stackTrace)?  other,}) {final _that = this;
+switch (_that) {
+case MessageNetworkFailure() when network != null:
+return network(_that.code,_that.message,_that.stackTrace);case MessageStorageFailure() when storage != null:
+return storage(_that.code,_that.message,_that.stackTrace);case MessageOtherFailure() when other != null:
+return other(_that.code,_that.message,_that.stackTrace);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 
-class _$MessageNetworkFailureImpl implements MessageNetworkFailure {
-  const _$MessageNetworkFailureImpl({
-    required this.code,
-    required this.message,
-    required this.stackTrace,
-  });
 
-  @override
-  final int? code;
-  @override
-  final String message;
-  @override
-  final StackTrace stackTrace;
+class MessageNetworkFailure implements MessageFailure {
+  const MessageNetworkFailure({required this.code, required this.message, required this.stackTrace});
+  
 
-  @override
-  String toString() {
-    return 'MessageFailure.network(code: $code, message: $message, stackTrace: $stackTrace)';
-  }
+@override final  int? code;
+@override final  String message;
+@override final  StackTrace stackTrace;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MessageNetworkFailureImpl &&
-            (identical(other.code, code) || other.code == code) &&
-            (identical(other.message, message) || other.message == message) &&
-            (identical(other.stackTrace, stackTrace) ||
-                other.stackTrace == stackTrace));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, code, message, stackTrace);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int? code, String message, StackTrace stackTrace)
-    network,
-    required TResult Function(int? code, String message, StackTrace stackTrace)
-    storage,
-    required TResult Function(int? code, String message, StackTrace stackTrace)
-    other,
-  }) {
-    return network(code, message, stackTrace);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? code, String message, StackTrace stackTrace)?
-    network,
-    TResult? Function(int? code, String message, StackTrace stackTrace)?
-    storage,
-    TResult? Function(int? code, String message, StackTrace stackTrace)? other,
-  }) {
-    return network?.call(code, message, stackTrace);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? code, String message, StackTrace stackTrace)? network,
-    TResult Function(int? code, String message, StackTrace stackTrace)? storage,
-    TResult Function(int? code, String message, StackTrace stackTrace)? other,
-    required TResult orElse(),
-  }) {
-    if (network != null) {
-      return network(code, message, stackTrace);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(MessageNetworkFailure value) network,
-    required TResult Function(MessageStorageFailure value) storage,
-    required TResult Function(MessageOtherFailure value) other,
-  }) {
-    return network(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MessageNetworkFailure value)? network,
-    TResult? Function(MessageStorageFailure value)? storage,
-    TResult? Function(MessageOtherFailure value)? other,
-  }) {
-    return network?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(MessageNetworkFailure value)? network,
-    TResult Function(MessageStorageFailure value)? storage,
-    TResult Function(MessageOtherFailure value)? other,
-    required TResult orElse(),
-  }) {
-    if (network != null) {
-      return network(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MessageNetworkFailure&&(identical(other.code, code) || other.code == code)&&(identical(other.message, message) || other.message == message)&&(identical(other.stackTrace, stackTrace) || other.stackTrace == stackTrace));
 }
 
-abstract class MessageNetworkFailure implements MessageFailure {
-  const factory MessageNetworkFailure({
-    required final int? code,
-    required final String message,
-    required final StackTrace stackTrace,
-  }) = _$MessageNetworkFailureImpl;
 
-  @override
-  int? get code;
-  @override
-  String get message;
-  @override
-  StackTrace get stackTrace;
+@override
+int get hashCode => Object.hash(runtimeType,code,message,stackTrace);
+
+@override
+String toString() {
+  return 'MessageFailure.network(code: $code, message: $message, stackTrace: $stackTrace)';
 }
+
+
+}
+
+
+
 
 /// @nodoc
 
-class _$MessageStorageFailureImpl implements MessageStorageFailure {
-  const _$MessageStorageFailureImpl({
-    required this.code,
-    required this.message,
-    required this.stackTrace,
-  });
 
-  @override
-  final int? code;
-  @override
-  final String message;
-  @override
-  final StackTrace stackTrace;
+class MessageStorageFailure implements MessageFailure {
+  const MessageStorageFailure({required this.code, required this.message, required this.stackTrace});
+  
 
-  @override
-  String toString() {
-    return 'MessageFailure.storage(code: $code, message: $message, stackTrace: $stackTrace)';
-  }
+@override final  int? code;
+@override final  String message;
+@override final  StackTrace stackTrace;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MessageStorageFailureImpl &&
-            (identical(other.code, code) || other.code == code) &&
-            (identical(other.message, message) || other.message == message) &&
-            (identical(other.stackTrace, stackTrace) ||
-                other.stackTrace == stackTrace));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, code, message, stackTrace);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int? code, String message, StackTrace stackTrace)
-    network,
-    required TResult Function(int? code, String message, StackTrace stackTrace)
-    storage,
-    required TResult Function(int? code, String message, StackTrace stackTrace)
-    other,
-  }) {
-    return storage(code, message, stackTrace);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? code, String message, StackTrace stackTrace)?
-    network,
-    TResult? Function(int? code, String message, StackTrace stackTrace)?
-    storage,
-    TResult? Function(int? code, String message, StackTrace stackTrace)? other,
-  }) {
-    return storage?.call(code, message, stackTrace);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? code, String message, StackTrace stackTrace)? network,
-    TResult Function(int? code, String message, StackTrace stackTrace)? storage,
-    TResult Function(int? code, String message, StackTrace stackTrace)? other,
-    required TResult orElse(),
-  }) {
-    if (storage != null) {
-      return storage(code, message, stackTrace);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(MessageNetworkFailure value) network,
-    required TResult Function(MessageStorageFailure value) storage,
-    required TResult Function(MessageOtherFailure value) other,
-  }) {
-    return storage(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MessageNetworkFailure value)? network,
-    TResult? Function(MessageStorageFailure value)? storage,
-    TResult? Function(MessageOtherFailure value)? other,
-  }) {
-    return storage?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(MessageNetworkFailure value)? network,
-    TResult Function(MessageStorageFailure value)? storage,
-    TResult Function(MessageOtherFailure value)? other,
-    required TResult orElse(),
-  }) {
-    if (storage != null) {
-      return storage(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MessageStorageFailure&&(identical(other.code, code) || other.code == code)&&(identical(other.message, message) || other.message == message)&&(identical(other.stackTrace, stackTrace) || other.stackTrace == stackTrace));
 }
 
-abstract class MessageStorageFailure implements MessageFailure {
-  const factory MessageStorageFailure({
-    required final int? code,
-    required final String message,
-    required final StackTrace stackTrace,
-  }) = _$MessageStorageFailureImpl;
 
-  @override
-  int? get code;
-  @override
-  String get message;
-  @override
-  StackTrace get stackTrace;
+@override
+int get hashCode => Object.hash(runtimeType,code,message,stackTrace);
+
+@override
+String toString() {
+  return 'MessageFailure.storage(code: $code, message: $message, stackTrace: $stackTrace)';
 }
+
+
+}
+
+
+
 
 /// @nodoc
 
-class _$MessageOtherFailureImpl implements MessageOtherFailure {
-  const _$MessageOtherFailureImpl({
-    required this.code,
-    required this.message,
-    required this.stackTrace,
-  });
 
-  @override
-  final int? code;
-  @override
-  final String message;
-  @override
-  final StackTrace stackTrace;
+class MessageOtherFailure implements MessageFailure {
+  const MessageOtherFailure({required this.code, required this.message, required this.stackTrace});
+  
 
-  @override
-  String toString() {
-    return 'MessageFailure.other(code: $code, message: $message, stackTrace: $stackTrace)';
-  }
+@override final  int? code;
+@override final  String message;
+@override final  StackTrace stackTrace;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MessageOtherFailureImpl &&
-            (identical(other.code, code) || other.code == code) &&
-            (identical(other.message, message) || other.message == message) &&
-            (identical(other.stackTrace, stackTrace) ||
-                other.stackTrace == stackTrace));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, code, message, stackTrace);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int? code, String message, StackTrace stackTrace)
-    network,
-    required TResult Function(int? code, String message, StackTrace stackTrace)
-    storage,
-    required TResult Function(int? code, String message, StackTrace stackTrace)
-    other,
-  }) {
-    return other(code, message, stackTrace);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? code, String message, StackTrace stackTrace)?
-    network,
-    TResult? Function(int? code, String message, StackTrace stackTrace)?
-    storage,
-    TResult? Function(int? code, String message, StackTrace stackTrace)? other,
-  }) {
-    return other?.call(code, message, stackTrace);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? code, String message, StackTrace stackTrace)? network,
-    TResult Function(int? code, String message, StackTrace stackTrace)? storage,
-    TResult Function(int? code, String message, StackTrace stackTrace)? other,
-    required TResult orElse(),
-  }) {
-    if (other != null) {
-      return other(code, message, stackTrace);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(MessageNetworkFailure value) network,
-    required TResult Function(MessageStorageFailure value) storage,
-    required TResult Function(MessageOtherFailure value) other,
-  }) {
-    return other(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MessageNetworkFailure value)? network,
-    TResult? Function(MessageStorageFailure value)? storage,
-    TResult? Function(MessageOtherFailure value)? other,
-  }) {
-    return other?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(MessageNetworkFailure value)? network,
-    TResult Function(MessageStorageFailure value)? storage,
-    TResult Function(MessageOtherFailure value)? other,
-    required TResult orElse(),
-  }) {
-    if (other != null) {
-      return other(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MessageOtherFailure&&(identical(other.code, code) || other.code == code)&&(identical(other.message, message) || other.message == message)&&(identical(other.stackTrace, stackTrace) || other.stackTrace == stackTrace));
 }
 
-abstract class MessageOtherFailure implements MessageFailure {
-  const factory MessageOtherFailure({
-    required final int? code,
-    required final String message,
-    required final StackTrace stackTrace,
-  }) = _$MessageOtherFailureImpl;
 
-  @override
-  int? get code;
-  @override
-  String get message;
-  @override
-  StackTrace get stackTrace;
+@override
+int get hashCode => Object.hash(runtimeType,code,message,stackTrace);
+
+@override
+String toString() {
+  return 'MessageFailure.other(code: $code, message: $message, stackTrace: $stackTrace)';
 }
+
+
+}
+
+
+
+
+// dart format on

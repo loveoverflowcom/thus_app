@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,575 +9,535 @@ part of 'chat_bloc.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
 /// @nodoc
 mixin _$ChatEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String conversationId) started,
-    required TResult Function(String receiverId, String content) messageSent,
-    required TResult Function(Message message) messageReceived,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String conversationId)? started,
-    TResult? Function(String receiverId, String content)? messageSent,
-    TResult? Function(Message message)? messageReceived,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String conversationId)? started,
-    TResult Function(String receiverId, String content)? messageSent,
-    TResult Function(Message message)? messageReceived,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_MessageSent value) messageSent,
-    required TResult Function(_MessageReceived value) messageReceived,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_MessageSent value)? messageSent,
-    TResult? Function(_MessageReceived value)? messageReceived,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_MessageSent value)? messageSent,
-    TResult Function(_MessageReceived value)? messageReceived,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ChatEvent()';
+}
+
+
+}
+
+
+
+
+/// Adds pattern-matching-related methods to [ChatEvent].
+extension ChatEventPatterns on ChatEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Started value)?  started,TResult Function( _MessageSent value)?  messageSent,TResult Function( _MessageReceived value)?  messageReceived,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Started() when started != null:
+return started(_that);case _MessageSent() when messageSent != null:
+return messageSent(_that);case _MessageReceived() when messageReceived != null:
+return messageReceived(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Started value)  started,required TResult Function( _MessageSent value)  messageSent,required TResult Function( _MessageReceived value)  messageReceived,}){
+final _that = this;
+switch (_that) {
+case _Started():
+return started(_that);case _MessageSent():
+return messageSent(_that);case _MessageReceived():
+return messageReceived(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Started value)?  started,TResult? Function( _MessageSent value)?  messageSent,TResult? Function( _MessageReceived value)?  messageReceived,}){
+final _that = this;
+switch (_that) {
+case _Started() when started != null:
+return started(_that);case _MessageSent() when messageSent != null:
+return messageSent(_that);case _MessageReceived() when messageReceived != null:
+return messageReceived(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String conversationId)?  started,TResult Function( String receiverId,  String content)?  messageSent,TResult Function( Message message)?  messageReceived,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Started() when started != null:
+return started(_that.conversationId);case _MessageSent() when messageSent != null:
+return messageSent(_that.receiverId,_that.content);case _MessageReceived() when messageReceived != null:
+return messageReceived(_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String conversationId)  started,required TResult Function( String receiverId,  String content)  messageSent,required TResult Function( Message message)  messageReceived,}) {final _that = this;
+switch (_that) {
+case _Started():
+return started(_that.conversationId);case _MessageSent():
+return messageSent(_that.receiverId,_that.content);case _MessageReceived():
+return messageReceived(_that.message);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String conversationId)?  started,TResult? Function( String receiverId,  String content)?  messageSent,TResult? Function( Message message)?  messageReceived,}) {final _that = this;
+switch (_that) {
+case _Started() when started != null:
+return started(_that.conversationId);case _MessageSent() when messageSent != null:
+return messageSent(_that.receiverId,_that.content);case _MessageReceived() when messageReceived != null:
+return messageReceived(_that.message);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 
-class _$StartedImpl implements _Started {
-  const _$StartedImpl({required this.conversationId});
 
-  @override
-  final String conversationId;
+class _Started implements ChatEvent {
+  const _Started({required this.conversationId});
+  
 
-  @override
-  String toString() {
-    return 'ChatEvent.started(conversationId: $conversationId)';
-  }
+ final  String conversationId;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$StartedImpl &&
-            (identical(other.conversationId, conversationId) ||
-                other.conversationId == conversationId));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, conversationId);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String conversationId) started,
-    required TResult Function(String receiverId, String content) messageSent,
-    required TResult Function(Message message) messageReceived,
-  }) {
-    return started(conversationId);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String conversationId)? started,
-    TResult? Function(String receiverId, String content)? messageSent,
-    TResult? Function(Message message)? messageReceived,
-  }) {
-    return started?.call(conversationId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String conversationId)? started,
-    TResult Function(String receiverId, String content)? messageSent,
-    TResult Function(Message message)? messageReceived,
-    required TResult orElse(),
-  }) {
-    if (started != null) {
-      return started(conversationId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_MessageSent value) messageSent,
-    required TResult Function(_MessageReceived value) messageReceived,
-  }) {
-    return started(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_MessageSent value)? messageSent,
-    TResult? Function(_MessageReceived value)? messageReceived,
-  }) {
-    return started?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_MessageSent value)? messageSent,
-    TResult Function(_MessageReceived value)? messageReceived,
-    required TResult orElse(),
-  }) {
-    if (started != null) {
-      return started(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Started&&(identical(other.conversationId, conversationId) || other.conversationId == conversationId));
 }
 
-abstract class _Started implements ChatEvent {
-  const factory _Started({required final String conversationId}) =
-      _$StartedImpl;
 
-  String get conversationId;
+@override
+int get hashCode => Object.hash(runtimeType,conversationId);
+
+@override
+String toString() {
+  return 'ChatEvent.started(conversationId: $conversationId)';
 }
+
+
+}
+
+
+
 
 /// @nodoc
 
-class _$MessageSentImpl implements _MessageSent {
-  const _$MessageSentImpl({required this.receiverId, required this.content});
 
-  @override
-  final String receiverId;
-  @override
-  final String content;
+class _MessageSent implements ChatEvent {
+  const _MessageSent({required this.receiverId, required this.content});
+  
 
-  @override
-  String toString() {
-    return 'ChatEvent.messageSent(receiverId: $receiverId, content: $content)';
-  }
+ final  String receiverId;
+ final  String content;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MessageSentImpl &&
-            (identical(other.receiverId, receiverId) ||
-                other.receiverId == receiverId) &&
-            (identical(other.content, content) || other.content == content));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, receiverId, content);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String conversationId) started,
-    required TResult Function(String receiverId, String content) messageSent,
-    required TResult Function(Message message) messageReceived,
-  }) {
-    return messageSent(receiverId, content);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String conversationId)? started,
-    TResult? Function(String receiverId, String content)? messageSent,
-    TResult? Function(Message message)? messageReceived,
-  }) {
-    return messageSent?.call(receiverId, content);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String conversationId)? started,
-    TResult Function(String receiverId, String content)? messageSent,
-    TResult Function(Message message)? messageReceived,
-    required TResult orElse(),
-  }) {
-    if (messageSent != null) {
-      return messageSent(receiverId, content);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_MessageSent value) messageSent,
-    required TResult Function(_MessageReceived value) messageReceived,
-  }) {
-    return messageSent(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_MessageSent value)? messageSent,
-    TResult? Function(_MessageReceived value)? messageReceived,
-  }) {
-    return messageSent?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_MessageSent value)? messageSent,
-    TResult Function(_MessageReceived value)? messageReceived,
-    required TResult orElse(),
-  }) {
-    if (messageSent != null) {
-      return messageSent(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MessageSent&&(identical(other.receiverId, receiverId) || other.receiverId == receiverId)&&(identical(other.content, content) || other.content == content));
 }
 
-abstract class _MessageSent implements ChatEvent {
-  const factory _MessageSent({
-    required final String receiverId,
-    required final String content,
-  }) = _$MessageSentImpl;
 
-  String get receiverId;
-  String get content;
+@override
+int get hashCode => Object.hash(runtimeType,receiverId,content);
+
+@override
+String toString() {
+  return 'ChatEvent.messageSent(receiverId: $receiverId, content: $content)';
 }
+
+
+}
+
+
+
 
 /// @nodoc
 
-class _$MessageReceivedImpl implements _MessageReceived {
-  const _$MessageReceivedImpl({required this.message});
 
-  @override
-  final Message message;
+class _MessageReceived implements ChatEvent {
+  const _MessageReceived({required this.message});
+  
 
-  @override
-  String toString() {
-    return 'ChatEvent.messageReceived(message: $message)';
-  }
+ final  Message message;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MessageReceivedImpl &&
-            (identical(other.message, message) || other.message == message));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String conversationId) started,
-    required TResult Function(String receiverId, String content) messageSent,
-    required TResult Function(Message message) messageReceived,
-  }) {
-    return messageReceived(message);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String conversationId)? started,
-    TResult? Function(String receiverId, String content)? messageSent,
-    TResult? Function(Message message)? messageReceived,
-  }) {
-    return messageReceived?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String conversationId)? started,
-    TResult Function(String receiverId, String content)? messageSent,
-    TResult Function(Message message)? messageReceived,
-    required TResult orElse(),
-  }) {
-    if (messageReceived != null) {
-      return messageReceived(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_MessageSent value) messageSent,
-    required TResult Function(_MessageReceived value) messageReceived,
-  }) {
-    return messageReceived(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_MessageSent value)? messageSent,
-    TResult? Function(_MessageReceived value)? messageReceived,
-  }) {
-    return messageReceived?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_MessageSent value)? messageSent,
-    TResult Function(_MessageReceived value)? messageReceived,
-    required TResult orElse(),
-  }) {
-    if (messageReceived != null) {
-      return messageReceived(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MessageReceived&&(identical(other.message, message) || other.message == message));
 }
 
-abstract class _MessageReceived implements ChatEvent {
-  const factory _MessageReceived({required final Message message}) =
-      _$MessageReceivedImpl;
 
-  Message get message;
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'ChatEvent.messageReceived(message: $message)';
 }
+
+
+}
+
+
+
 
 /// @nodoc
 mixin _$ChatState {
-  ChatStatus get status => throw _privateConstructorUsedError;
-  List<Message> get messages => throw _privateConstructorUsedError;
-  String? get conversationId => throw _privateConstructorUsedError;
-  String? get message => throw _privateConstructorUsedError;
 
-  /// Create a copy of ChatState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ChatStateCopyWith<ChatState> get copyWith =>
-      throw _privateConstructorUsedError;
+ ChatStatus get status; List<ConversationItem> get items; String? get conversationId; Profile? get peerProfile; String? get message;
+/// Create a copy of ChatState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChatStateCopyWith<ChatState> get copyWith => _$ChatStateCopyWithImpl<ChatState>(this as ChatState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.items, items)&&(identical(other.conversationId, conversationId) || other.conversationId == conversationId)&&(identical(other.peerProfile, peerProfile) || other.peerProfile == peerProfile)&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(items),conversationId,peerProfile,message);
+
+@override
+String toString() {
+  return 'ChatState(status: $status, items: $items, conversationId: $conversationId, peerProfile: $peerProfile, message: $message)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ChatStateCopyWith<$Res> {
-  factory $ChatStateCopyWith(ChatState value, $Res Function(ChatState) then) =
-      _$ChatStateCopyWithImpl<$Res, ChatState>;
-  @useResult
-  $Res call({
-    ChatStatus status,
-    List<Message> messages,
-    String? conversationId,
-    String? message,
-  });
-}
+abstract mixin class $ChatStateCopyWith<$Res>  {
+  factory $ChatStateCopyWith(ChatState value, $Res Function(ChatState) _then) = _$ChatStateCopyWithImpl;
+@useResult
+$Res call({
+ ChatStatus status, List<ConversationItem> items, String? conversationId, Profile? peerProfile, String? message
+});
 
+
+
+
+}
 /// @nodoc
-class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
+class _$ChatStateCopyWithImpl<$Res>
     implements $ChatStateCopyWith<$Res> {
-  _$ChatStateCopyWithImpl(this._value, this._then);
+  _$ChatStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ChatState _self;
+  final $Res Function(ChatState) _then;
 
-  /// Create a copy of ChatState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? status = null,
-    Object? messages = null,
-    Object? conversationId = freezed,
-    Object? message = freezed,
-  }) {
-    return _then(
-      _value.copyWith(
-            status: null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                      as ChatStatus,
-            messages: null == messages
-                ? _value.messages
-                : messages // ignore: cast_nullable_to_non_nullable
-                      as List<Message>,
-            conversationId: freezed == conversationId
-                ? _value.conversationId
-                : conversationId // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            message: freezed == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                      as String?,
-          )
-          as $Val,
-    );
-  }
+/// Create a copy of ChatState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? items = null,Object? conversationId = freezed,Object? peerProfile = freezed,Object? message = freezed,}) {
+  return _then(_self.copyWith(
+status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as ChatStatus,items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
+as List<ConversationItem>,conversationId: freezed == conversationId ? _self.conversationId : conversationId // ignore: cast_nullable_to_non_nullable
+as String?,peerProfile: freezed == peerProfile ? _self.peerProfile : peerProfile // ignore: cast_nullable_to_non_nullable
+as Profile?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [ChatState].
+extension ChatStatePatterns on ChatState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ChatState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ChatState() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ChatState value)  $default,){
+final _that = this;
+switch (_that) {
+case _ChatState():
+return $default(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ChatState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ChatState() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ChatStatus status,  List<ConversationItem> items,  String? conversationId,  Profile? peerProfile,  String? message)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ChatState() when $default != null:
+return $default(_that.status,_that.items,_that.conversationId,_that.peerProfile,_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ChatStatus status,  List<ConversationItem> items,  String? conversationId,  Profile? peerProfile,  String? message)  $default,) {final _that = this;
+switch (_that) {
+case _ChatState():
+return $default(_that.status,_that.items,_that.conversationId,_that.peerProfile,_that.message);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ChatStatus status,  List<ConversationItem> items,  String? conversationId,  Profile? peerProfile,  String? message)?  $default,) {final _that = this;
+switch (_that) {
+case _ChatState() when $default != null:
+return $default(_that.status,_that.items,_that.conversationId,_that.peerProfile,_that.message);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
-abstract class _$$ChatStateImplCopyWith<$Res>
-    implements $ChatStateCopyWith<$Res> {
-  factory _$$ChatStateImplCopyWith(
-    _$ChatStateImpl value,
-    $Res Function(_$ChatStateImpl) then,
-  ) = __$$ChatStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    ChatStatus status,
-    List<Message> messages,
-    String? conversationId,
-    String? message,
-  });
+
+
+class _ChatState implements ChatState {
+  const _ChatState({this.status = ChatStatus.initial, final  List<ConversationItem> items = const [], this.conversationId, this.peerProfile, this.message}): _items = items;
+  
+
+@override@JsonKey() final  ChatStatus status;
+ final  List<ConversationItem> _items;
+@override@JsonKey() List<ConversationItem> get items {
+  if (_items is EqualUnmodifiableListView) return _items;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_items);
+}
+
+@override final  String? conversationId;
+@override final  Profile? peerProfile;
+@override final  String? message;
+
+/// Create a copy of ChatState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ChatStateCopyWith<_ChatState> get copyWith => __$ChatStateCopyWithImpl<_ChatState>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._items, _items)&&(identical(other.conversationId, conversationId) || other.conversationId == conversationId)&&(identical(other.peerProfile, peerProfile) || other.peerProfile == peerProfile)&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_items),conversationId,peerProfile,message);
+
+@override
+String toString() {
+  return 'ChatState(status: $status, items: $items, conversationId: $conversationId, peerProfile: $peerProfile, message: $message)';
+}
+
+
 }
 
 /// @nodoc
-class __$$ChatStateImplCopyWithImpl<$Res>
-    extends _$ChatStateCopyWithImpl<$Res, _$ChatStateImpl>
-    implements _$$ChatStateImplCopyWith<$Res> {
-  __$$ChatStateImplCopyWithImpl(
-    _$ChatStateImpl _value,
-    $Res Function(_$ChatStateImpl) _then,
-  ) : super(_value, _then);
+abstract mixin class _$ChatStateCopyWith<$Res> implements $ChatStateCopyWith<$Res> {
+  factory _$ChatStateCopyWith(_ChatState value, $Res Function(_ChatState) _then) = __$ChatStateCopyWithImpl;
+@override @useResult
+$Res call({
+ ChatStatus status, List<ConversationItem> items, String? conversationId, Profile? peerProfile, String? message
+});
 
-  /// Create a copy of ChatState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? status = null,
-    Object? messages = null,
-    Object? conversationId = freezed,
-    Object? message = freezed,
-  }) {
-    return _then(
-      _$ChatStateImpl(
-        status: null == status
-            ? _value.status
-            : status // ignore: cast_nullable_to_non_nullable
-                  as ChatStatus,
-        messages: null == messages
-            ? _value._messages
-            : messages // ignore: cast_nullable_to_non_nullable
-                  as List<Message>,
-        conversationId: freezed == conversationId
-            ? _value.conversationId
-            : conversationId // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        message: freezed == message
-            ? _value.message
-            : message // ignore: cast_nullable_to_non_nullable
-                  as String?,
-      ),
-    );
-  }
+
+
+
 }
-
 /// @nodoc
+class __$ChatStateCopyWithImpl<$Res>
+    implements _$ChatStateCopyWith<$Res> {
+  __$ChatStateCopyWithImpl(this._self, this._then);
 
-class _$ChatStateImpl implements _ChatState {
-  const _$ChatStateImpl({
-    this.status = ChatStatus.initial,
-    final List<Message> messages = const [],
-    this.conversationId,
-    this.message,
-  }) : _messages = messages;
+  final _ChatState _self;
+  final $Res Function(_ChatState) _then;
 
-  @override
-  @JsonKey()
-  final ChatStatus status;
-  final List<Message> _messages;
-  @override
-  @JsonKey()
-  List<Message> get messages {
-    if (_messages is EqualUnmodifiableListView) return _messages;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_messages);
-  }
-
-  @override
-  final String? conversationId;
-  @override
-  final String? message;
-
-  @override
-  String toString() {
-    return 'ChatState(status: $status, messages: $messages, conversationId: $conversationId, message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ChatStateImpl &&
-            (identical(other.status, status) || other.status == status) &&
-            const DeepCollectionEquality().equals(other._messages, _messages) &&
-            (identical(other.conversationId, conversationId) ||
-                other.conversationId == conversationId) &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    status,
-    const DeepCollectionEquality().hash(_messages),
-    conversationId,
-    message,
-  );
-
-  /// Create a copy of ChatState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ChatStateImplCopyWith<_$ChatStateImpl> get copyWith =>
-      __$$ChatStateImplCopyWithImpl<_$ChatStateImpl>(this, _$identity);
+/// Create a copy of ChatState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? items = null,Object? conversationId = freezed,Object? peerProfile = freezed,Object? message = freezed,}) {
+  return _then(_ChatState(
+status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as ChatStatus,items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
+as List<ConversationItem>,conversationId: freezed == conversationId ? _self.conversationId : conversationId // ignore: cast_nullable_to_non_nullable
+as String?,peerProfile: freezed == peerProfile ? _self.peerProfile : peerProfile // ignore: cast_nullable_to_non_nullable
+as Profile?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
 }
 
-abstract class _ChatState implements ChatState {
-  const factory _ChatState({
-    final ChatStatus status,
-    final List<Message> messages,
-    final String? conversationId,
-    final String? message,
-  }) = _$ChatStateImpl;
 
-  @override
-  ChatStatus get status;
-  @override
-  List<Message> get messages;
-  @override
-  String? get conversationId;
-  @override
-  String? get message;
-
-  /// Create a copy of ChatState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ChatStateImplCopyWith<_$ChatStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
+
+// dart format on

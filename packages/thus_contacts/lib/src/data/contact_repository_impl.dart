@@ -70,6 +70,33 @@ final class ContactRepositoryImpl implements ContactRepository {
   }
 
   @override
+  TaskEither<ContactFailure, Map<String, Profile>> getProfilesByIds(
+    Set<String> userIds,
+  ) {
+    return _withSession((session) async {
+      if (userIds.isEmpty) return {};
+
+      // Fetch all in one request using `in.(id1,id2,...)`
+      final idList = userIds.join(',');
+      final list = await _restClient.getJsonList(
+        AppConstants.restProfilesPath,
+        query: {
+          'user_id': 'in.($idList)',
+          'select': 'user_id,username,display_name,avatar_url',
+        },
+        headers: _bearer(session.accessToken),
+      );
+
+      final result = <String, Profile>{};
+      for (final raw in list ?? []) {
+        final profile = Profile.fromJson(_castMap(raw));
+        result[profile.userId] = profile;
+      }
+      return result;
+    });
+  }
+
+  @override
   TaskEither<ContactFailure, Profile> updateMyProfile({
     required String userId,
     String? displayName,

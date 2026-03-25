@@ -7,7 +7,7 @@ import 'package:thus_core/thus_core.dart';
 
 import 'package:thus_network/src/http_log_interceptor.dart';
 
-class RestClient {
+final class RestClient {
   RestClient({
     required String baseUrl,
     required http.Client client,
@@ -231,6 +231,13 @@ class RestClient {
     }
     if (decoded is List<dynamic>) {
       return decoded;
+    }
+    // Unwrap {"data": [...]} envelope
+    if (decoded is Map) {
+      final Object? data = decoded['data'];
+      if (data is List<dynamic>) {
+        return data;
+      }
     }
 
     throw const FormatException('Expected JSON array response.');

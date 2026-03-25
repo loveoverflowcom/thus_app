@@ -11,7 +11,7 @@ final class PersonalView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final session = context.watch<AuthBloc>().state.session;
-    final isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
+    final themeMode = context.watch<ThemeCubit>().state;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Personal')),
@@ -30,7 +30,6 @@ final class PersonalView extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text('Username: ${session?.username ?? '-'}'),
-                  Text('User ID: ${session?.userId ?? '-'}'),
                 ],
               ),
             ),
@@ -46,14 +45,30 @@ final class PersonalView extends StatelessWidget {
                   onTap: () => context.push('/profile'),
                 ),
                 const Divider(height: 1),
-                SwitchListTile(
-                  title: const Text('Dark mode'),
-                  secondary: Icon(
-                    isDark ? Icons.dark_mode : Icons.light_mode,
+                ListTile(
+                  leading: Icon(_themeModeIcon(themeMode)),
+                  title: const Text('Giao diện'),
+                  trailing: DropdownButton<ThemeMode>(
+                    value: themeMode,
+                    underline: const SizedBox.shrink(),
+                    items: const [
+                      DropdownMenuItem(
+                        value: ThemeMode.system,
+                        child: Text('Hệ thống'),
+                      ),
+                      DropdownMenuItem(
+                        value: ThemeMode.light,
+                        child: Text('Sáng'),
+                      ),
+                      DropdownMenuItem(
+                        value: ThemeMode.dark,
+                        child: Text('Tối'),
+                      ),
+                    ],
+                    onChanged: (mode) {
+                      if (mode != null) context.read<ThemeCubit>().setTheme(mode);
+                    },
                   ),
-                  value: isDark,
-                  onChanged: (_) =>
-                      context.read<ThemeCubit>().toggleTheme(),
                 ),
                 const Divider(height: 1),
                 ListTile(
@@ -73,4 +88,10 @@ final class PersonalView extends StatelessWidget {
       ),
     );
   }
+
+  IconData _themeModeIcon(ThemeMode mode) => switch (mode) {
+        ThemeMode.system => Icons.brightness_auto,
+        ThemeMode.light => Icons.light_mode,
+        ThemeMode.dark => Icons.dark_mode,
+      };
 }

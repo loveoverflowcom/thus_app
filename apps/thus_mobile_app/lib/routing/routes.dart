@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thus_auth/thus_auth.dart';
+import 'package:thus_contacts/thus_contacts.dart';
 import 'package:thus_messaging/thus_messaging.dart';
 
 import 'package:thus_mobile_app/features/auth/views.dart';
@@ -31,7 +32,7 @@ GoRouter buildAppRouter() => GoRouter(
     );
 
 @TypedGoRoute<SplashRoute>(path: '/splash')
-final class SplashRoute extends GoRouteData {
+final class SplashRoute extends GoRouteData with $SplashRoute {
   const SplashRoute();
 
   @override
@@ -40,7 +41,7 @@ final class SplashRoute extends GoRouteData {
 }
 
 @TypedGoRoute<LoginRoute>(path: '/login')
-final class LoginRoute extends GoRouteData {
+final class LoginRoute extends GoRouteData with $LoginRoute {
   const LoginRoute();
 
   @override
@@ -49,7 +50,7 @@ final class LoginRoute extends GoRouteData {
 }
 
 @TypedGoRoute<ChatRoute>(path: '/chat/:conversationId')
-final class ChatRoute extends GoRouteData {
+final class ChatRoute extends GoRouteData with $ChatRoute {
   const ChatRoute({required this.conversationId});
 
   final String conversationId;
@@ -75,19 +76,22 @@ final class MainShellRoute extends ShellRouteData {
   }
 }
 
-final class HomeTabRoute extends GoRouteData {
+final class HomeTabRoute extends GoRouteData with $HomeTabRoute {
   const HomeTabRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      BlocProvider.value(
-        value: ChatListBloc(context.read<MessageRepository>())
-          ..add(const ChatListEvent.started()),
+      BlocProvider(
+        create: (context) => ChatListBloc(
+          context.read<MessageRepository>(),
+          context.read<ContactRepository>(),
+          ProfileCache(),
+        ),
         child: const ChatListView(),
       );
 }
 
-final class ContactsTabRoute extends GoRouteData {
+final class ContactsTabRoute extends GoRouteData with $ContactsTabRoute {
   const ContactsTabRoute();
 
   @override
@@ -95,7 +99,7 @@ final class ContactsTabRoute extends GoRouteData {
       const ContactsView();
 }
 
-final class PersonalTabRoute extends GoRouteData {
+final class PersonalTabRoute extends GoRouteData with $PersonalTabRoute {
   const PersonalTabRoute();
 
   @override
@@ -104,7 +108,7 @@ final class PersonalTabRoute extends GoRouteData {
 }
 
 @TypedGoRoute<ProfileRoute>(path: '/profile')
-final class ProfileRoute extends GoRouteData {
+final class ProfileRoute extends GoRouteData with $ProfileRoute {
   const ProfileRoute();
 
   @override

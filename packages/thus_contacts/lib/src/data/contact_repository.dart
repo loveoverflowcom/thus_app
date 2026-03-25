@@ -14,6 +14,13 @@ abstract class ContactRepository {
 
   TaskEither<ContactFailure, Profile> getProfileById(String userId);
 
+  /// Batch-fetch profiles for a set of userIds.
+  /// Deduplicates internally. Returns a map of userId → Profile.
+  /// Missing/failed profiles are omitted (caller uses fallback).
+  TaskEither<ContactFailure, Map<String, Profile>> getProfilesByIds(
+    Set<String> userIds,
+  );
+
   TaskEither<ContactFailure, Profile> updateMyProfile({
     required String userId,
     String? displayName,

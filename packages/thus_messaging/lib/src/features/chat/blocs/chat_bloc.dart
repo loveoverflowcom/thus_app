@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:thus_contacts/thus_contacts.dart';
 
 import 'package:thus_messaging/src/data/message_repository/message_repository.dart';
 import 'package:thus_messaging/src/data/message_repository/models/message_domain_event.dart';
 import 'package:thus_messaging/src/data/message_repository/models/message_failure.dart';
+import 'package:thus_messaging/src/data/models/conversation_item.dart';
 import 'package:thus_messaging/src/data/models/message.dart';
 
 part 'chat_bloc.freezed.dart';
@@ -33,8 +35,9 @@ sealed class ChatEvent with _$ChatEvent {
 sealed class ChatState with _$ChatState {
   const factory ChatState({
     @Default(ChatStatus.initial) ChatStatus status,
-    @Default([]) List<Message> messages,
+    @Default([]) List<ConversationItem> items,
     String? conversationId,
+    Profile? peerProfile,
     String? message,
   }) = _ChatState;
 }
@@ -55,7 +58,11 @@ enum ChatStatus {
 // ─────────────────────────────
 
 final class ChatBloc extends Bloc<ChatEvent, ChatState> {
-  ChatBloc(this._repository) : super(const ChatState()) {
+  ChatBloc(
+    this._repository,
+    this._contactRepository,
+    this._profileCache,
+  ) : super(const ChatState()) {
     on<_Started>(_onStarted);
     on<_MessageSent>(_onMessageSent);
     on<_MessageReceived>(_onMessageReceived);
@@ -64,14 +71,15 @@ final class ChatBloc extends Bloc<ChatEvent, ChatState> {
       switch (event) {
         case MessageReceived(:final conversationId):
           if (conversationId == state.conversationId) {
-            // Reload history when a new message arrives for this conversation
             add(ChatEvent.started(conversationId: conversationId));
           }
-        }
+      }
     });
   }
 
   final MessageRepository _repository;
+  final ContactRepository _contactRepository;
+  final ProfileCache _profileCache;
   late final StreamSubscription<MessageDomainEvent> _subscription;
 
   @override
@@ -85,18 +93,24 @@ final class ChatBloc extends Bloc<ChatEvent, ChatState> {
       status: ChatStatus.loading,
       conversationId: event.conversationId,
     ));
-    final result =
-        await _repository.loadHistory(event.conversationId).run();
-    result.match(
-      (failure) => emit(
-        state.copyWith(
-          status: ChatStatus.failure,
-          message: _failureMessage(failure),
-        ),
-      ),
-      (messages) => emit(
-        state.copyWith(status: ChatStatus.ready, messages: messages),
-      ),
+
+    final result = await _repository.loadHistory(event.conversationId).run();
+    await result.match(
+      (failure) async => emit(state.copyWith(
+        status: ChatStatus.failure,
+        message: _failureMessage(failure),
+      )),
+      (messages) async {
+        final items = await _enrichMessages(messages);
+        // Peer in 1-on-1 chat = conversationId = peer's userId.
+        // If cache still empty (no messages yet), fetch peer directly.
+        final peerProfile = await _resolveOne(event.conversationId);
+        emit(state.copyWith(
+          status: ChatStatus.ready,
+          items: items,
+          peerProfile: peerProfile,
+        ));
+      },
     );
   }
 
@@ -112,34 +126,88 @@ final class ChatBloc extends Bloc<ChatEvent, ChatState> {
         )
         .run();
     result.match(
-      (failure) => emit(
-        state.copyWith(
-          status: ChatStatus.failure,
-          message: _failureMessage(failure),
-        ),
-      ),
+      (failure) => emit(state.copyWith(
+        status: ChatStatus.failure,
+        message: _failureMessage(failure),
+      )),
       (sent) => add(ChatEvent.messageReceived(message: sent)),
     );
   }
 
-  void _onMessageReceived(
+  Future<void> _onMessageReceived(
     _MessageReceived event,
     Emitter<ChatState> emit,
-  ) {
-    final existing = state.messages;
-    final alreadyExists = existing.any((m) => m.id == event.message.id);
+  ) async {
+    final existing = state.items;
+    final alreadyExists = existing.any((i) => i.message.id == event.message.id);
 
-    final List<Message> updated;
+    final List<ConversationItem> updated;
     if (alreadyExists) {
+      // Re-resolve profile for updated message
+      final profile = await _resolveOne(event.message.senderId);
       updated = existing
-          .map((m) => m.id == event.message.id ? event.message : m)
+          .map((i) => i.message.id == event.message.id
+              ? ConversationItem(message: event.message, senderProfile: profile)
+              : i)
           .toList(growable: false);
     } else {
-      updated = [...existing, event.message]
-        ..sort((a, b) => a.timestamp.compareTo(b.timestamp));
+      final profile = await _resolveOne(event.message.senderId);
+      final newItem =
+          ConversationItem(message: event.message, senderProfile: profile);
+      updated = [...existing, newItem]
+        ..sort((a, b) =>
+            a.message.timestamp.compareTo(b.message.timestamp));
     }
 
-    emit(state.copyWith(status: ChatStatus.ready, messages: updated));
+    emit(state.copyWith(status: ChatStatus.ready, items: updated));
+  }
+
+  // ── Profile resolution ────────────────────────────────────────────────────
+
+  /// Enriches a list of messages with sender profiles.
+  /// Deduplicates userIds, fetches missing ones in a single batch call.
+  Future<List<ConversationItem>> _enrichMessages(
+    List<Message> messages,
+  ) async {
+    final missingIds = _profileCache.missing(
+      messages.map((m) => m.senderId),
+    );
+
+    if (missingIds.isNotEmpty) {
+      final result =
+          await _contactRepository.getProfilesByIds(missingIds).run();
+      result.fold(
+        (_) {}, // silently ignore — fallback used below
+        (profiles) {
+          for (final entry in profiles.entries) {
+            _profileCache.put(entry.key, entry.value);
+          }
+        },
+      );
+    }
+
+    return messages
+        .map((m) => ConversationItem(
+              message: m,
+              senderProfile: _profileCache.getOrFallback(m.senderId),
+            ))
+        .toList(growable: false);
+  }
+
+  /// Resolves a single sender, using cache first.
+  Future<Profile> _resolveOne(String userId) async {
+    if (_profileCache.has(userId)) {
+      return _profileCache.getOrFallback(userId);
+    }
+    final result =
+        await _contactRepository.getProfileById(userId).run();
+    return result.fold(
+      (_) => ProfileCache.unknown,
+      (profile) {
+        _profileCache.put(userId, profile);
+        return profile;
+      },
+    );
   }
 
   String _failureMessage(MessageFailure failure) => switch (failure) {
